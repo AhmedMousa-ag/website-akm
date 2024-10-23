@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Header />
-      <HomePage className="bg-black font-poppins text-white h-screen text-center text-3xl bg-none">
+      <HomePage className="bg-black font-poppins text-white h-screen text-center text-3xl">
         <p>Hi my Name is Ahmed</p>
       </HomePage>
     </>

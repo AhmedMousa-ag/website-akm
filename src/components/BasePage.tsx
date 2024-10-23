@@ -8,8 +8,12 @@ export const BasePage = ({
   className?: string;
 }) => {
   return (
-    <div className={className} style={{ backgroundImage: `url(${MyPic}) ` }}>
+    <div className={className}>
       {children}
+      <div
+        className={className + " opacity-30"}
+        style={{ backgroundImage: `url(${MyPic}) ` }}
+      ></div>
     </div>
   );
 };
