@@ -1,5 +1,4 @@
-import MyPic from "../../assets/my-picture.png";
-
+import { BasePage } from "../../components/BasePage";
 export const HomePage = ({
   children,
   className,
@@ -7,9 +6,5 @@ export const HomePage = ({
   className?: string;
   children?: React.ReactNode;
 }) => {
-  return (
-    <div className={className} style={{ backgroundImage: `url(${MyPic}) ` }}>
-      {children}
-    </div>
-  );
+  return <BasePage className={className}>{children}</BasePage>;
 };
