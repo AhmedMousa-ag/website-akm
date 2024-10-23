@@ -8,7 +8,9 @@ export const Header = () => {
         <p>Ahmed Karem Mousa</p>
       </div>
       <NavElementRight>
-        <Button className="mt-6">Personal Projects</Button>
+        <Button className="mt-6" isActive>
+          Personal Projects
+        </Button>
         <Button>History</Button>
         <Button>Github</Button>
       </NavElementRight>
