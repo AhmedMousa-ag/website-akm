@@ -6,5 +6,8 @@ export const HomePage = ({
   className?: string;
   children?: React.ReactNode;
 }) => {
-  return <BasePage cssClass={className}>{children}</BasePage>;
+  let cssClass =
+    "bg-black font-poppins text-white h-screen text-center text-3xl ";
+  cssClass = className ? cssClass + className : cssClass;
+  return <BasePage cssClass={cssClass}>{children}</BasePage>;
 };
