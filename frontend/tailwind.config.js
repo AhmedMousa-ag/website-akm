@@ -8,6 +8,9 @@ export default {
     backgroundImage: {
       akmpic: "url('./src/assets/my-picture.png')",
     },
+    animation: {
+      "bounce-slow": "bounce 0.7s linear infinite",
+    },
   },
   plugins: [],
 };
