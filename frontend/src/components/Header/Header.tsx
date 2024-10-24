@@ -1,19 +1,44 @@
 import { NavBar } from "./NavBar";
 import { NavElementRight } from "./NavElements";
-import { Button } from "./Atoms/Button";
-export const Header = () => {
+import { NavLink } from "react-router-dom";
+export const Header = ({ children }: { children?: React.ReactNode }) => {
+  const hoverClass = " rounded hover:blur-[1px] hover:line-through";
+  function transActCss(baseCss: string, isActive: boolean) {
+    return isActive ? baseCss + " line-through" : baseCss;
+  }
   return (
-    <NavBar className="flex bg-black text-white justify-between h-20 font-poppins">
-      <div className="mt-6 ml-6">
-        <p>Ahmed Karem Mousa</p>
-      </div>
-      <NavElementRight>
-        <Button className="mt-6" isActive>
-          Personal Projects
-        </Button>
-        <Button>History</Button>
-        <Button>Github</Button>
-      </NavElementRight>
-    </NavBar>
+    <>
+      <NavBar className="flex bg-black text-white justify-between h-20 font-poppins">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            transActCss(`mt-6 ml-6 ${hoverClass}`, isActive)
+          }
+          end
+        >
+          <p>Ahmed Karem Mousa</p>
+        </NavLink>
+        <NavElementRight className="mt-6">
+          <NavLink
+            to="projects"
+            className={({ isActive }) =>
+              transActCss(`mt-6 ${hoverClass}`, isActive)
+            }
+          >
+            Personal Projects
+          </NavLink>
+          <NavLink
+            to="history"
+            className={({ isActive }) => transActCss(hoverClass, isActive)}
+          >
+            History
+          </NavLink>
+          <NavLink to="github" className={hoverClass}>
+            Github
+          </NavLink>
+        </NavElementRight>
+      </NavBar>
+      {children}
+    </>
   );
 };
