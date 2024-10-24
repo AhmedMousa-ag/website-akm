@@ -2,7 +2,7 @@ import { NavBar } from "./NavBar";
 import { NavElementRight } from "./NavElements";
 import { NavLink } from "react-router-dom";
 export const Header = ({ children }: { children?: React.ReactNode }) => {
-  const hoverClass = " rounded hover:blur-[1px] hover:line-through";
+  const hoverClass = " rounded hover:blur-[0.06rem] hover:line-through";
   function transActCss(baseCss: string, isActive: boolean) {
     return isActive ? baseCss + " line-through" : baseCss;
   }
