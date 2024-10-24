@@ -5,6 +5,9 @@ export default {
     fontFamily: {
       poppins: ["Poppins"],
     },
+    backgroundImage: {
+      akmpic: "url('./src/assets/my-picture.png')",
+    },
   },
   plugins: [],
 };

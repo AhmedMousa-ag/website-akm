@@ -6,5 +6,5 @@ export const HomePage = ({
   className?: string;
   children?: React.ReactNode;
 }) => {
-  return <BasePage className={className}>{children}</BasePage>;
+  return <BasePage cssClass={className}>{children}</BasePage>;
 };

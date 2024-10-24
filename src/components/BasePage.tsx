@@ -1,19 +1,18 @@
-import MyPic from "../assets/my-picture.png";
+// import MyPic from "../assets/my-picture.png";
 
 export const BasePage = ({
   children,
-  className,
+  cssClass,
 }: {
   children?: React.ReactNode;
-  className?: string;
+  cssClass?: string;
 }) => {
+  const className =
+    "h-full opacity-30 bg-no-repeat bg-right-top bg-fixed bg-akmpic";
   return (
-    <div className={className}>
+    <div className={cssClass}>
       {children}
-      <div
-        className={className + " opacity-30"}
-        style={{ backgroundImage: `url(${MyPic}) ` }}
-      ></div>
+      <div className={className}></div>
     </div>
   );
 };
