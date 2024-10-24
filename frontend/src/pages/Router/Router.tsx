@@ -37,6 +37,17 @@ export const router = createBrowserRouter([
           );
         },
       },
+      {
+        path: "linkedIn",
+        Component: () => {
+          window.location.href = "https://www.linkedin.com/in/akmousa/";
+          return (
+            <BasePage>
+              <LoadingBouncer />
+            </BasePage>
+          );
+        },
+      },
     ],
   },
 ]);

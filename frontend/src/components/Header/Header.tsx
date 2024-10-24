@@ -33,6 +33,9 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
           >
             History
           </NavLink>
+          <NavLink to="linkedIn" className={hoverClass}>
+            LinkedIn
+          </NavLink>
           <NavLink to="github" className={hoverClass}>
             Github
           </NavLink>
