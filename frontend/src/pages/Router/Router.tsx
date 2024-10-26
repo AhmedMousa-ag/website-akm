@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { LoadingBouncer } from "../../components/Loading";
 import { RootLayout } from "./Root";
 import { BasePage } from "../../components/BasePage";
+import { Login } from "../Home/Login";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,14 @@ export const router = createBrowserRouter([
             </BasePage>
           );
         },
+      },
+      {
+        path: "login_akm",
+        element: (
+          <BasePage>
+            <Login />
+          </BasePage>
+        ),
       },
     ],
   },

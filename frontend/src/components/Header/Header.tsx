@@ -39,6 +39,7 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
           <NavLink to="github" className={hoverClass}>
             Github
           </NavLink>
+          <NavLink to="login_akm" />
         </NavElementRight>
       </NavBar>
       {children}
