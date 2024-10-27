@@ -1,5 +1,5 @@
-use std::sync::LazyLock;
 use crate::controller::utils::env_var;
+use std::sync::LazyLock;
 
 pub struct Config {
     pub port: u16,
