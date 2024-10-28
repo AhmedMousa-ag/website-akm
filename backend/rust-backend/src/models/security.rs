@@ -1,7 +1,8 @@
+use jsonwebtoken::Algorithm;
 use serde::{Deserialize, Serialize};
-use jsonwebtoken:: Algorithm;
 
-use crate::configs:: config::get_config;
+use crate::configs::config::get_config;
+
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UserAuth {
@@ -13,7 +14,7 @@ pub struct UserAuth {
 pub trait JWTOperations<T> {
     fn sign(&self) -> String;
     fn validate_token(&self, token: String) -> (bool, Option<T>);
-    fn get_algo(&self)-> Algorithm{
+    fn get_algo(&self) -> Algorithm {
         let configs = get_config();
         let algo: Algorithm = match configs.jwt_algo.as_str() {
             "HS256" => Algorithm::HS256,
@@ -22,6 +23,22 @@ pub trait JWTOperations<T> {
             "RS256" => Algorithm::RS256,
             _ => Algorithm::HS256,
         };
-        return algo
+        return algo;
+    }
+}
+
+pub struct Password {
+    pub pass: String,
+    // pub hasher: DefaultHasher,
+}
+
+pub trait PasswordsProtection {
+    fn hash_salt_password(&self) -> String;
+    fn is_same_password(&self,db_hashed_pass:String)->bool{
+        let hashed_pass = self.hash_salt_password();
+        if hashed_pass == db_hashed_pass{
+            return true;
+        }
+        false
     }
 }

@@ -1,13 +1,13 @@
 use axum::response::Json;
 use serde_json::{json, Value};
 
-use crate::models::user::{JWTOperations, UserAuth};
+use crate::models::security::{JWTOperations, UserAuth};
 
 pub async fn login_view() -> Json<Value> {
     //TODO
 
     // Database Integeration
-    
+
     //---------------------
     let user = UserAuth {
         username: None,

@@ -5,7 +5,7 @@ use sha2::Sha256;
 
 // use std::collections::BTreeMap;
 use crate::configs::config::get_config;
-use crate::models::user::{JWTOperations, UserAuth};
+use crate::models::security::{JWTOperations, UserAuth};
 
 impl JWTOperations<UserAuth> for UserAuth {
     fn sign(&self) -> String {

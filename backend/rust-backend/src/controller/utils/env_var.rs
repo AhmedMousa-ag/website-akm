@@ -26,3 +26,24 @@ pub fn load_jwt_algo() -> String {
     let jwt_algo: String = env::var("JWT_ALGORITHM").expect("Running Port Must Be Set.");
     jwt_algo
 }
+
+pub fn load_psql_host() -> String {
+    env::var("PSQL_HOST").expect("PSQL Host Must be set")
+}
+pub fn load_psql_port() -> String {
+    env::var("PSQL_PORT").expect("PSQL Port Must Be Set.")
+}
+pub fn load_psql_username() -> String {
+    env::var("PSQL_USER").expect("PSQL Username Must Be Set.")
+}
+pub fn load_psql_password() -> String {
+    env::var("PSQL_PASS").expect("PSQL Password Must Be Set.")
+}
+
+pub fn load_psql_db_name() -> String {
+    env::var("PSQL_NAME").expect("PSQL DB Name Must Be Set.")
+}
+
+pub fn load_salting_text() -> String {
+    env::var("SALTING_TEXT").expect("Salting Text Must Be Set.")
+}
