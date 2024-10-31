@@ -23,12 +23,13 @@ dist-ssr
 *.sln
 *.sw?
 
-
+tsconfig.node.tsbuildinfo
+tsconfig.app.tsbuildinfo
 #Personal
 TODO
 
 
-#Rust 
+#---------------------------------------Rust------------------------------------ 
 # will have compiled files and executables
 debug/
 target/
@@ -44,3 +45,5 @@ Cargo.lock
 *.pdb
 
 .env
+# Diesel Migraions
+00000000000000_diesel_initial_setup
