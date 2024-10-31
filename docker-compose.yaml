@@ -1,0 +1,59 @@
+x-env: &env
+  env_file: ./backend/rust-backend/.env
+  environment:
+    - POSTGRES_USER=${POSTGRES_USER}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    - POSTGRES_DB=${POSTGRES_DB}
+
+services:
+  akm-website:
+    container_name: akm-website
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - akm-backend-rust
+    restart: "always"
+    links:
+      - "akm-backend-rust:backend"
+  #----------------------------------------
+  akm-backend-rust:
+    <<: *env
+    build: ./backend/rust-backend
+    container_name: akm-backend-rust
+    ports:
+      - "8000:8000"
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: "always"
+  #---------------------------------------
+  init-db:
+    <<: *env
+    container_name: init-db
+
+    build:
+      context: ./backend/rust-backend/
+      dockerfile: Dockerfile.dev
+    command: "bash diesel_migrations.sh"
+    depends_on:
+      database:
+        condition: service_healthy
+  #-------------------------------------
+  database:
+    <<: *env
+    image: postgres:17-alpine
+    container_name: database
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_volume:/var/lib/postgresql/akm_data
+    restart: "always"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_volume:
