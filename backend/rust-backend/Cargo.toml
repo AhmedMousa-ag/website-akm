@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 axum = "0.7.7"
 diesel = { version = "2.2.4", features = ["postgres"] }
+diesel_migrations = "2.2.0"
 dotenv = "0.15.0"
 futures-util = "0.3.31"
 hmac = "0.12.1"
