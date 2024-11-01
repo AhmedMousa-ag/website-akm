@@ -1,21 +1,29 @@
-use axum::response::Json;
+use crate::controller::apis_logic::login::get_user;
+use crate::models::api_schema::login::{LoginRequest, LoginResponse};
+use crate::models::security::{JWTOperations, Password, PasswordsProtection, UserAuth};
+use axum::{extract::Json, response,http::StatusCode};
 use serde_json::{json, Value};
 
-use crate::models::security::{JWTOperations, UserAuth};
-
-pub async fn login_view() -> Json<Value> {
-    //TODO
-
-    // Database Integeration
-
+pub async fn login_view(Json(payload): Json<LoginRequest>) ->   (StatusCode,response::Json<Value>) {
+    let query_res = get_user(payload.username);
+    if query_res.is_err(){
+        return (StatusCode::NOT_FOUND, Json(json!(LoginResponse{status:false,token:None,error:Some("User Doesn't Exists".to_string())})));
+    }
+    let db_user = query_res.unwrap();
     //---------------------
+    let password_ver = Password{pass:db_user.password};
+    if !password_ver.is_same_password(payload.password){
+        return (StatusCode::UNAUTHORIZED, Json(json!(LoginResponse{status:false,token:None,error:Some("Invalide Username Or Password".to_string())})));
+    }
     let user = UserAuth {
-        username: None,
-        user_id: None,
+        username: Some(db_user.username),
+        user_id: Some(db_user.id),
     };
-    let sign = user.sign();
-    println!("Token: {}", sign);
-    // let (is_valid,user) = user.validate_token(sign);
-    // println!("Validated token: {:?}",user);
-    Json(json!({ "tokn": 42 }))
+    let token = user.sign();
+    let login_resul = LoginResponse {
+        status: true,
+        token: Some(token),
+        error: None
+    };
+    (StatusCode::OK,Json(json!(login_resul)))
 }

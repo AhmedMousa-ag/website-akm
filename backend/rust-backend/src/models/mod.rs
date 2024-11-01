@@ -1,3 +1,4 @@
 pub mod psql;
 pub mod security;
-// pub mod password;
+
+pub mod api_schema;
