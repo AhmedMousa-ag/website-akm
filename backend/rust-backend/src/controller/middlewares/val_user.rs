@@ -1,13 +1,11 @@
 use crate::controller::utils::util;
+use crate::models::security::JWTOperations;
 use crate::models::security::UserAuth;
-use crate::{configs::config::Config, models::security::JWTOperations};
 use axum::extract::Request;
-use jsonwebtoken::{decode, Algorithm, DecodingKey, Validation};
-use std::sync::LazyLock;
 /*
 Returns true if valide auth and the second boolean for the subscription
 */
-pub fn validate_jwt_sub(req: &Request, configs: &LazyLock<Config>) -> bool {
+pub fn validate_jwt_sub(req: &Request) -> bool {
     //-> Result<bool,ErrorKind> {
     let token = util::get_auth_header_token(&req);
 

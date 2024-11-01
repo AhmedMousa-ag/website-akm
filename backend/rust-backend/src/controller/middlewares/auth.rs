@@ -1,4 +1,3 @@
-use crate::configs::config::get_config;
 use crate::controller::middlewares::val_user::validate_jwt_sub;
 use axum::{
     extract::Request,
@@ -39,7 +38,7 @@ where
     }
 
     fn call(&mut self, request: Request) -> Self::Future {
-        let is_valid = validate_jwt_sub(&request, get_config());
+        let is_valid = validate_jwt_sub(&request);
 
         if !is_valid {
             let mut status_code: StatusCode = StatusCode::UNAUTHORIZED;

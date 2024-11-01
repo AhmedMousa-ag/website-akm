@@ -4,6 +4,6 @@ diesel::table! {
         username -> Varchar,
         password -> Text,
         email -> Varchar,
-        last_login -> Timestamp,
+        last_login -> Nullable<Timestamp>,
     }
 }
