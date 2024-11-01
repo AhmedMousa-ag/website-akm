@@ -26,12 +26,13 @@ services:
     depends_on:
       database:
         condition: service_healthy
+      init-db:
+        condition: service_completed_successfully
     restart: "always"
   #---------------------------------------
   init-db:
     <<: *env
     container_name: init-db
-
     build:
       context: ./backend/rust-backend/
       dockerfile: Dockerfile.dev
