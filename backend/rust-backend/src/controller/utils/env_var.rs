@@ -47,3 +47,13 @@ pub fn load_psql_db_name() -> String {
 pub fn load_salting_text() -> String {
     env::var("SALTING_TEXT").expect("Salting Text Must Be Set.")
 }
+
+pub fn load_default_password() -> String {
+    env::var("DEFAULT_PASSWORD").expect("Deafult Password Must Be Set")
+}
+pub fn load_default_username() -> String {
+    env::var("DEFAULT_USERNAME").expect("Deafult Username Must Be Set")
+}
+pub fn load_default_email() -> String {
+    env::var("DEFAULT_EMAIL").expect("Deafult Email Must Be Set")
+}

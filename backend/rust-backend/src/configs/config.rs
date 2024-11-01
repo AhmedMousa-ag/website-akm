@@ -12,6 +12,9 @@ pub struct Config {
     pub psql_password: String,
     pub psql_db_name: String,
     pub salting_text: String,
+    pub default_username: String,
+    pub default_password: String,
+    pub default_email: String,
 }
 
 static CONFIGURATIONS: LazyLock<Config> = LazyLock::new(|| Config {
@@ -25,6 +28,9 @@ static CONFIGURATIONS: LazyLock<Config> = LazyLock::new(|| Config {
     psql_password: env_var::load_psql_password(),
     psql_db_name: env_var::load_psql_db_name(),
     salting_text: env_var::load_salting_text(),
+    default_username: env_var::load_default_username(),
+    default_password: env_var::load_default_password(),
+    default_email: env_var::load_default_email(),
 });
 
 pub fn get_config<'a>() -> &'a LazyLock<Config> {

@@ -3,12 +3,13 @@ use axum::{
     Router,
 };
 // use rust_backend::controller::middlewares::auth;
-use rust_backend::views::login::login_view;
 use rust_backend::{configs::config, controller::utils::env_var::load_env_var};
+use rust_backend::{controller::db::migration::create_default_user, views::login::login_view};
 #[tokio::main]
 async fn main() {
     load_env_var();
     let config = config::get_config();
+    create_default_user();
     let app = Router::new()
         // .route_layer(auth::AuthLayer)
         .route("/health", get(|| async { "Healthy!" }))
