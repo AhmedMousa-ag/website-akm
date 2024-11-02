@@ -16,7 +16,17 @@ pub fn create_default_user() {
         .limit(1)
         .load::<String>(conn);
 
-    if all_users.is_ok() && all_users.unwrap().len() < 1 {
+    let is_user_in_sys = match all_users {
+        Ok(users) => {
+            if users.len() < 1 {
+                false
+            } else {
+                true
+            }
+        }
+        Err(e) => panic!("{:?}", e),
+    };
+    if !is_user_in_sys {
         println!("No users found, will create new ones...");
         let config = get_config();
         let hashed_password = Password {

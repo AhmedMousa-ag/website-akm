@@ -9,5 +9,5 @@ pub struct LoginRequest {
 pub struct LoginResponse {
     pub status: bool,
     pub token: Option<String>,
-    pub error: Option<String>
+    pub error: Option<String>,
 }
