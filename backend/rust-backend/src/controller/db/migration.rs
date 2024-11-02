@@ -34,11 +34,11 @@ pub fn create_default_user() {
         };
         let hashed_pass = hashed_password.hash_salt_password();
         let new_user = NewUser {
-            username: &config.default_password,
+            username: &config.default_username,
             password: &hashed_pass,
             email: &config.default_email,
         };
-
+        println!("Hashed Password: {:?}", hashed_pass);
         let insertion_res = diesel::insert_into(users::table)
             .values(&new_user)
             .execute(conn);

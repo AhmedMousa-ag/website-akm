@@ -12,7 +12,7 @@ pub async fn login_view(Json(payload): Json<LoginRequest>) -> (StatusCode, respo
             Json(json!(LoginResponse {
                 status: false,
                 token: None,
-                error: Some("User Doesn't Exists".to_string())
+                error: Some(format!("{:?}", query_res.err()))
             })),
         );
     }
@@ -21,7 +21,7 @@ pub async fn login_view(Json(payload): Json<LoginRequest>) -> (StatusCode, respo
     let password_ver = Password {
         pass: db_user.password,
     };
-    if !password_ver.is_same_password(payload.password) {
+    if !password_ver.is_same_password(password_ver.hash_salt_password()) {
         return (
             StatusCode::UNAUTHORIZED,
             Json(json!(LoginResponse {
