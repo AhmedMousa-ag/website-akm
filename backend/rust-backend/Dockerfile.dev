@@ -11,4 +11,4 @@ RUN cargo install cargo-watch
 
 CMD [ "cargo","watch","-x","run" ]
 
-# docker run --rm -p 8000:8000 -v .:/usr/src/akm_rust akm-rus
+# docker run --name akm-rus -p 8000:8000 -v ./:/usr/src/akm_rust --network website-akm_akm akm-rus

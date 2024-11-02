@@ -4,6 +4,15 @@ use crate::models::security::{JWTOperations, Password, PasswordsProtection, User
 use axum::{extract::Json, http::StatusCode, response};
 use serde_json::{json, Value};
 
+#[utoipa::path(
+    post,
+    path = "/login",
+    request_body=LoginRequest,
+    responses(
+        (status = 200, description = "Successfull Login", body = LoginResponse),
+        (status = NOT_FOUND, description = "Invalide User")
+    ),
+)]
 pub async fn login_view(Json(payload): Json<LoginRequest>) -> (StatusCode, response::Json<Value>) {
     let query_res = get_user(payload.username);
     if query_res.is_err() {

@@ -35,10 +35,6 @@ pub trait PasswordsProtection {
     fn hash_salt_password(&self) -> String;
     fn is_same_password(&self, db_hashed_pass: String) -> bool {
         let hashed_pass = self.hash_salt_password();
-        println!(
-            "passed password: {} and hashed password: {}",
-            db_hashed_pass, hashed_pass
-        );
         if hashed_pass == db_hashed_pass {
             return true;
         }
