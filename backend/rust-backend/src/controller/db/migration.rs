@@ -38,7 +38,6 @@ pub fn create_default_user() {
             password: &hashed_pass,
             email: &config.default_email,
         };
-        println!("Hashed Password: {:?}", hashed_pass);
         let insertion_res = diesel::insert_into(users::table)
             .values(&new_user)
             .execute(conn);
