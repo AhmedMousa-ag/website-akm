@@ -6,9 +6,9 @@ WORKDIR /usr/src/akm_rust
 COPY . .
 RUN cargo install diesel_cli --no-default-features --features postgres
 RUN cargo install cargo-watch
-
+RUN cargo build
 # RUN ./diesel_migrations.sh
 
 CMD [ "cargo","watch","-x","run" ]
 
-# docker run --name akm-rus -p 8000:8000 -v ./:/usr/src/akm_rust --network website-akm_akm akm-rus
+# docker run --name akm-rus --rm -p 8000:8000 -v $PWD:/usr/src/akm_rust --network website-akm_akm akm-rus

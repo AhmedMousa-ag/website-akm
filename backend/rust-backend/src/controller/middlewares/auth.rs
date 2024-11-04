@@ -41,25 +41,27 @@ where
         let is_valid = validate_jwt_sub(&request);
 
         if !is_valid {
-            let mut status_code: StatusCode = StatusCode::UNAUTHORIZED;
-            if request.method() == Method::OPTIONS {
-                // For preflight cors by browsers
-                status_code = StatusCode::OK;
-            }
-            let mut response = status_code.into_response();
-            response
-                .headers_mut() // For preflight cors by browsers
-                .insert("Access-Control-Allow-Origin", "*".parse().unwrap());
-            response.headers_mut().insert(
-                "Access-Control-Allow-Methods",
-                "POST, GET, OPTIONS, DELETE, PUT".parse().unwrap(),
-            );
-            response.headers_mut().insert(
-                "Access-Control-Allow-Headers",
-                "append,delete,entries,foreach,get,has,keys,set,values,Authorization,content-type,content-length,host,connection"
-                    .parse()
-                    .unwrap(),
-            );
+            let  status_code: StatusCode = StatusCode::UNAUTHORIZED;
+            // if request.method() == Method::OPTIONS {
+            //     //TODO You don't need it since you did add an OPTIONS layer already
+            //     // For preflight cors by browsers
+            //     status_code = StatusCode::OK;
+            // }
+            // let mut response = status_code.into_response();
+            // response
+            //     .headers_mut() // For preflight cors by browsers
+            //     .insert("Access-Control-Allow-Origin", "*".parse().unwrap());
+            // response.headers_mut().insert(
+            //     "Access-Control-Allow-Methods",
+            //     "POST, GET, OPTIONS, DELETE, PUT".parse().unwrap(),
+            // );
+            // response.headers_mut().insert(
+            //     "Access-Control-Allow-Headers",
+            //     "append,delete,entries,foreach,get,has,keys,set,values,Authorization,content-type,content-length,host,connection"
+            //         .parse()
+            //         .unwrap(),
+            // );
+            let  response = status_code.into_response();
             return Box::pin(async { Ok(response) });
         }
 
