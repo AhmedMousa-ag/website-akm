@@ -23,7 +23,9 @@ export const router = createBrowserRouter([
               </BasePage>
             }
           >
-            <HomePage />
+            <HomePage>
+              <p>Home Page....</p>
+            </HomePage>
           </Suspense>
         ),
       },

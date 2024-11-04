@@ -4,14 +4,20 @@ import {
   forwardRef,
   ReactNode,
   useState,
+  FormEvent,
 } from "react";
 import { OpenImperativeHandle } from "../../types/generic";
 import { createPortal } from "react-dom";
 
 export const InputModal = forwardRef<
   OpenImperativeHandle,
-  { children?: ReactNode; buttonsChildren?: ReactNode; title: string }
->(({ children, buttonsChildren, title }, ref) => {
+  {
+    children?: ReactNode;
+    buttonsChildren?: ReactNode;
+    title: string;
+    onSubmitFn: (events: FormEvent<HTMLFormElement>) => void;
+  }
+>(({ children, buttonsChildren, title, onSubmitFn }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   useImperativeHandle(ref, () => {
@@ -30,16 +36,21 @@ export const InputModal = forwardRef<
   // Title
   // Image
   // Paragraph
-
+  //rounded-xl
   return createPortal(
     <dialog ref={dialog}>
-      <div className="font-poppins text-white bg-black space-y-3">
+      <div className="font-poppins text-white bg-black p-5 ">
         <h3 className="text-center text-2xl">{title}</h3>
         <br />
-        <form>
+        <form
+          // onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          //   onSubmitFn(e);
+          // }}
+          onSubmit={(event) => onSubmitFn(event)}
+        >
           <div className="flex space-y-3 flex-col gap-2">{children}</div>
+          {buttonsChildren}
         </form>
-        {buttonsChildren}
       </div>
     </dialog>,
     document.getElementById("modal")!
