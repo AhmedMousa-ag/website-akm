@@ -6,6 +6,7 @@ import { LoadingBouncer } from "../../components/Loading";
 import { RootLayout } from "./Root";
 import { BasePage } from "../../components/BasePage";
 import { Login } from "../Home/Login";
+import { HistoryPage } from "../History/History";
 
 export const router = createBrowserRouter([
   {
@@ -24,9 +25,17 @@ export const router = createBrowserRouter([
             }
           >
             <HomePage>
-              <p>Home Page....</p>
+              <p className="opacity-100">Home Page....</p>
             </HomePage>
           </Suspense>
+        ),
+      },
+      {
+        path: "history",
+        element: (
+          <BasePage>
+            <HistoryPage />
+          </BasePage>
         ),
       },
       {

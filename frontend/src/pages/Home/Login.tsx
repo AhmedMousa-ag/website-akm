@@ -8,6 +8,7 @@ import { RootState } from "../../state/store";
 import { changeLoggedIn } from "../../state/login/loginSlice";
 import { usePostLoginMutation } from "../../state/login/loginApiSlice";
 import { LoginResponse } from "../../types/apis/login";
+import { LoadingBouncer } from "../../components/Loading";
 
 export const Login = () => {
   const isLoggedIn = useSelector(
@@ -62,7 +63,7 @@ export const Login = () => {
     }
   }
   if (isLoading) {
-    api_status = <p className={statusTextCss}> "....Loading....."</p>;
+    api_status = <LoadingBouncer extra_classes={statusTextCss} />;
   }
   const inputcss = "text-black rounded-sm";
   const className = "space ";
