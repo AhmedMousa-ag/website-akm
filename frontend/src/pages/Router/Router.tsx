@@ -32,11 +32,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "history",
-        element: (
-          <BasePage>
-            <HistoryPage />
-          </BasePage>
-        ),
+        element: <HistoryPage />,
       },
       {
         path: "github",
@@ -62,11 +58,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "login_akm",
-        element: (
-          <BasePage>
-            <Login />
-          </BasePage>
-        ),
+        element: <Login />,
       },
     ],
   },

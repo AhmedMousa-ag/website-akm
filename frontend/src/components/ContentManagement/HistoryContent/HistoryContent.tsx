@@ -14,29 +14,33 @@ export const HistoryContent = ({
 }: HistoryContent) => {
   // If logged in show edit, delete
   const [isContentExpanded, setIsContentExpanded] = useState(false);
-  let cssMargin = "-52 ";
+  let cssMargin = "";
   if (sort_num % 2 === 0) {
-    cssMargin = "mr" + cssMargin;
+    cssMargin = "ml-60 mr-10 " + cssMargin;
   } else {
-    cssMargin = "ml" + cssMargin;
+    cssMargin = "mr-60 ml-10 " + cssMargin;
   }
 
   function toggleExpandContent() {
     setIsContentExpanded((prev) => !prev);
   }
+  console.log(cssMargin);
   const contentParagraph = !isContentExpanded ? summary : content;
   return (
     <div
       className={
         cssMargin +
-        "border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-100"
+        "border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-100 max-w-screen-lg"
       }
       key={sort_num}
     >
       <title>{title}</title>
       <p>{title}</p>
       {
-        <button className="text-lg" onClick={toggleExpandContent}>
+        <button
+          className="text-lg hover:bg-gray-600 rounded"
+          onClick={toggleExpandContent}
+        >
           {contentParagraph}
         </button>
       }

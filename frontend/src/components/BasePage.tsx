@@ -1,3 +1,7 @@
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { toggleIsEditing } from "../state/basePage";
+
 export const BasePage = ({
   children,
   cssClass,
@@ -5,24 +9,28 @@ export const BasePage = ({
   children?: React.ReactNode;
   cssClass?: string;
 }) => {
+  const isEdittingState = useSelector(
+    (state: RootState) => state.isEditing.isEditing
+  );
+  const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  let addButton = undefined;
-  if (token && token !== "") {
-    addButton = (
-      <div className="flex justify-end p-10">
-        <button className="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-100 text-xl text-wrap ">
-          Add Item
-        </button>
-      </div>
-    );
-  }
+
   const baseCssClss =
-    "bg-black font-poppins text-white h-screen text-center text-3xl";
+    "bg-black h-fit min-h-screen font-poppins text-white  text-center text-3xl";
   const cssClassName = cssClass ? baseCssClss + cssClass : baseCssClss;
   return (
     <div className={cssClassName}>
-      <div className="h-full bg-no-repeat bg-[60rem] bg-fixed bg-akmpic background:rgba(0,0,0,0.3);">
-        {addButton}
+      <div className="h-fit min-h-screen bg-no-repeat bg-[60rem] bg-fixed bg-akmpic background:rgba(0,0,0,0.3);">
+        {token && token !== "" ? (
+          <div className="flex justify-end p-10">
+            <button
+              onClick={() => dispatch(toggleIsEditing())}
+              className="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-100 text-xl text-wrap "
+            >
+              {isEdittingState ? "Cancel" : "Add Item"}
+            </button>
+          </div>
+        ) : undefined}
         <div className="flex justify-center">{children}</div>
       </div>
     </div>
