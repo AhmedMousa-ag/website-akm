@@ -4,7 +4,7 @@ use axum::{
     response::{IntoResponse, Response},
 };
 use futures_util::future::BoxFuture;
-use hyper::{Method, StatusCode};
+use hyper::StatusCode;
 use std::task::{Context, Poll};
 use tower::{Layer, Service};
 #[derive(Clone)]
@@ -41,7 +41,7 @@ where
         let is_valid = validate_jwt_sub(&request);
 
         if !is_valid {
-            let  status_code: StatusCode = StatusCode::UNAUTHORIZED;
+            let status_code: StatusCode = StatusCode::UNAUTHORIZED;
             // if request.method() == Method::OPTIONS {
             //     //TODO You don't need it since you did add an OPTIONS layer already
             //     // For preflight cors by browsers
@@ -61,7 +61,7 @@ where
             //         .parse()
             //         .unwrap(),
             // );
-            let  response = status_code.into_response();
+            let response = status_code.into_response();
             return Box::pin(async { Ok(response) });
         }
 

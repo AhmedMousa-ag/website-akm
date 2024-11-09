@@ -1,17 +1,20 @@
 use axum::{
-    routing::{get, post},
+    routing::{get, patch, post},
     Router,
 };
 use http::Method;
-use rust_backend::controller::middlewares::auth;
 use rust_backend::{
     configs::config, controller::utils::env_var::load_env_var, views::swagger_ui::ApiDoc,
 };
-use rust_backend::{controller::db::migration::create_default_user, views::login::login_view};
+use rust_backend::{controller::db::startup::create_default_user, views::login::login_view};
+use rust_backend::{
+    controller::middlewares::auth,
+    views::posts::{add_post, delete_post, get_posts, update_post},
+};
+use tower_http::cors::{Any, CorsLayer};
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 
-use tower_http::cors::{Any, CorsLayer};
 #[tokio::main]
 async fn main() {
     load_env_var();
@@ -28,7 +31,11 @@ async fn main() {
         .allow_headers(Any)
         .allow_origin(Any);
     let app = Router::new()
-        .route("/healthz", get(|| async { "Healthy!" }))
+        .route("/posts", post(add_post))
+        .route(
+            "/posts/",
+            get(get_posts).patch(update_post).delete(delete_post),
+        ) //post(add_post)
         .route_layer(auth::AuthLayer)
         .route("/health", get(|| async { "Healthy!" }))
         .route("/login", post(login_view))
