@@ -8,7 +8,7 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
   }
   return (
     <>
-      <NavBar className="flex bg-black text-white justify-between h-20 font-poppins">
+      <NavBar className="flex bg-black text-white justify-between h-20 font-montserrat">
         <NavLink
           to="/"
           className={({ isActive }) =>

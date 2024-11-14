@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useRef } from "react";
-import { InputModal } from "../../components/ContentManagement/InputModal";
+import { InputModal } from "../../components/ContentManagement/Modals/InputModal";
 import { OpenImperativeHandle } from "../../types/generic";
 import { BasePage } from "../../components/BasePage";
 import { useNavigate } from "react-router-dom";

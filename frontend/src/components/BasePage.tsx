@@ -16,7 +16,7 @@ export const BasePage = ({
   const token = localStorage.getItem("token");
 
   const baseCssClss =
-    "bg-black h-fit min-h-screen font-poppins text-white  text-center text-3xl";
+    "bg-black h-fit min-h-screen font-montserrat text-white  text-center text-3xl";
   const cssClassName = cssClass ? baseCssClss + cssClass : baseCssClss;
   return (
     <div className={cssClassName}>
@@ -25,7 +25,7 @@ export const BasePage = ({
           <div className="flex justify-end p-10">
             <button
               onClick={() => dispatch(toggleIsEditing())}
-              className="border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-100 text-xl text-wrap "
+              className={`border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-100 text-xl text-wrap ${isEdittingState ? "hover:bg-red-600" : "hover:bg-green-600"}`}
             >
               {isEdittingState ? "Cancel" : "Add Item"}
             </button>

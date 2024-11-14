@@ -6,7 +6,7 @@ import {
   useState,
   FormEvent,
 } from "react";
-import { OpenImperativeHandle } from "../../types/generic";
+import { OpenImperativeHandle } from "../../../types/generic";
 import { createPortal } from "react-dom";
 
 export const InputModal = forwardRef<
@@ -39,7 +39,7 @@ export const InputModal = forwardRef<
   //rounded-xl
   return createPortal(
     <dialog ref={dialog}>
-      <div className="font-poppins text-white bg-black p-5 ">
+      <div className="font-montserrat text-white bg-black p-5 ">
         <h3 className="text-center text-2xl">{title}</h3>
         <br />
         <form

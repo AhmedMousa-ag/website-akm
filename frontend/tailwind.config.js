@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      poppins: ["Poppins"],
+      montserrat: ["Montserrat"],
     },
     backgroundImage: {
       akmpic: "url('./src/assets/my-picture.png')",
