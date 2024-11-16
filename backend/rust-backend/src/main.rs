@@ -34,9 +34,13 @@ async fn main() {
         .route("/posts", post(add_post))
         .route(
             "/posts/",
-            get(get_posts).patch(update_post).delete(delete_post),
+            patch(update_post).delete(delete_post),
         ) //post(add_post)
         .route_layer(auth::AuthLayer)
+        .route(
+            "/posts/",
+            get(get_posts)
+        ) 
         .route("/health", get(|| async { "Healthy!" }))
         .route("/login", post(login_view))
         .route_layer(cors)
