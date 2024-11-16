@@ -7,6 +7,7 @@ import { RootLayout } from "./Root";
 import { BasePage } from "../../components/BasePage";
 import { Login } from "../Home/Login";
 import { HistoryPage } from "../History/History";
+import { PersonalProjects } from "../PersonalProjects/PersonalProjects";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "history",
         element: <HistoryPage />,
+      },
+      {
+        path: "personal-projecst",
+        element: <PersonalProjects />,
       },
       {
         path: "github",

@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useDeletePostMutation } from "../../../state/posts/postsApiSlice";
+// import { useDeletePostMutation } from "../../../state/posts/postsApiSlice";
 import { LoadingBouncer } from "../../Loading";
 import { NewPost } from "./NewContent";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../state/store";
+import { AppDispatch, RootState } from "../../../state/store";
 import { changeIsEditing } from "../../../state/basePage";
 import VerifyAction from "../Modals/VerifyModal";
 import { changeOpenModal } from "../../../state/modals/verifySlice";
-import { removePost } from "../../../state/posts/postsSlice";
+import { deletePost } from "../../../state/posts/apiCalls";
+// import { removePost } from "../../../state/posts/postsSlice";
 type PostContent = {
   id: number;
   post_type: string;
@@ -31,9 +32,9 @@ export const PostContent = ({
   const isEdittingState = useSelector(
     (state: RootState) => state.isEditing.isEditing
   );
-
-  const [useDeleteHistory, { isLoading, isError }] = useDeletePostMutation();
-  const dispatch = useDispatch();
+  const deleteState = useSelector((state: RootState) => state.postsState);
+  // const [useDeleteHistory, { isLoading, isError }] = useDeletePostMutation();
+  const dispatch = useDispatch<AppDispatch>();
   const token = localStorage.getItem("token");
 
   let cssMargin = "";
@@ -48,10 +49,10 @@ export const PostContent = ({
   }
 
   function onDeleteButton() {
-    useDeleteHistory(id).then(() => {
-      dispatch(changeOpenModal(false));
-      dispatch(removePost(id));
-    });
+    // useDeleteHistory(id).then(() => {
+    dispatch(changeOpenModal(false));
+    dispatch(deletePost({ id }));
+    // });
   }
 
   function onEditButton() {
@@ -85,7 +86,7 @@ export const PostContent = ({
               cssMargin +
               "border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-100 max-w-screen-lg"
             }
-            key={sort_num}
+            key={`page_content${id}`}
           >
             {token && token !== "" && (
               <div className="text-sm  flex gap-2 justify-between">
@@ -101,8 +102,8 @@ export const PostContent = ({
                 >
                   Delete
                 </button>
-                {isLoading && <LoadingBouncer />}
-                {isError && <p>Error</p>}
+                {deleteState.isLoading && <LoadingBouncer />}
+                {deleteState.error && <p>Error</p>}
               </div>
             )}
             <title>{title}</title>

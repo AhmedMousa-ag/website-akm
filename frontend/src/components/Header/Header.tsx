@@ -20,7 +20,7 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
         </NavLink>
         <NavElementRight className="mt-6">
           <NavLink
-            to="projects"
+            to="personal-projecst"
             className={({ isActive }) =>
               transActCss(`mt-6 ${hoverClass}`, isActive)
             }

@@ -35,7 +35,8 @@ export const VerifyAction = ({
           className="hover:bg-red-600 hover:border hover:rounded-md"
           onClick={() => {
             // dispatch(changeOpenModal(false));
-            setIsOpenModa(false);
+            // setIsOpenModa(false);
+            toggleIsOpen();
           }}
         >
           No

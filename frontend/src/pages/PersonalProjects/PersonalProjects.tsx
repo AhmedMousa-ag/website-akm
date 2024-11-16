@@ -9,38 +9,34 @@ import { LoadingBouncer } from "../../components/Loading";
 import { useEffect } from "react";
 import { fetchPosts } from "../../state/posts/apiCalls";
 
-export const HistoryPage = () => {
-  // const { data, isLoading } = useGetPostsQuery("history");
+export const PersonalProjects = () => {
   const isEdittingState = useSelector(
     (state: RootState) => state.isEditing.isEditing
   );
   const posts = useSelector((state: RootState) => state.postsState);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    // if (!isLoading && data) {
-    dispatch(fetchPosts("history"));
-    // }
+    dispatch(fetchPosts("project"));
   }, [dispatch]);
-
   return (
     <BasePage>
       <div className="flex flex-col justify-end	 gap-y-20">
-        {isEdittingState && <NewPost post_type="history"></NewPost>}
+        {isEdittingState && <NewPost post_type="project"></NewPost>}
         {posts.isLoading && <LoadingBouncer />}
         {!posts.isLoading &&
           posts.content &&
-          posts.content.map((history, index) => {
+          posts.content.map((project, index) => {
             return (
-              history &&
-              history.post_type === "history" && (
+              project &&
+              project.post_type === "project" && (
                 <PostContent
-                  id={history.id}
-                  key={history.id}
-                  post_type={history.post_type}
+                  id={project.id}
+                  key={project.id}
+                  post_type={project.post_type}
                   sort_num={index}
-                  title={history.title}
-                  summary={history.summary}
-                  content={history.content}
+                  title={project.title}
+                  summary={project.summary}
+                  content={project.content}
                 />
               )
             );
