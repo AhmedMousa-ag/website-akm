@@ -20,7 +20,7 @@ export const BasePage = ({
   const cssClassName = cssClass ? baseCssClss + cssClass : baseCssClss;
   return (
     <div className={cssClassName}>
-      <div className="h-fit min-h-screen bg-no-repeat bg-[60rem] bg-fixed bg-akmpic background:rgba(0,0,0,0.3);">
+      <div className="h-fit min-h-screen bg-no-repeat lg:bg-[60rem] md:bg-[30rem] sm:bg-[1rem]  bg-fixed bg-akmpic background:rgba(0,0,0,0.3);">
         {token && token !== "" ? (
           <div className="flex justify-end p-10">
             <button
