@@ -7,7 +7,7 @@ export type OpenImperativeHandle = {
   toggle: () => void;
 };
 
-export type Props = {};
+// export type Props = {};
 
 export type FormInputChildren = {
   title: HTMLLabelElement;

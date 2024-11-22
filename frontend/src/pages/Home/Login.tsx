@@ -29,7 +29,7 @@ export const Login = () => {
       const timer = setTimeout(() => navigate("/"), 5000);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [isLoggedIn]);
   const handleCloseButton = () => {
     dialogRef.current?.toggle();
     navigate("/");

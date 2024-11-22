@@ -24,7 +24,7 @@ export const HistoryPage = () => {
 
   return (
     <BasePage>
-      <div className="flex flex-col justify-end	 gap-y-20">
+      <div className="grid items-start gap-y-20">
         {isEdittingState && <NewPost post_type="history"></NewPost>}
         {posts.isLoading && <LoadingBouncer />}
         {!posts.isLoading &&

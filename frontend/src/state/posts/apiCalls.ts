@@ -1,10 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { BACKEDN_URL } from "../../configs/constanst";
 import axios from "axios";
-import {
-  ContentBodyRequest,
-  UpdateContentResponse,
-} from "../../types/apis/content";
+import { ContentBodyRequest } from "../../types/apis/content";
 
 function getHeaders() {
   const TOKEN = localStorage.getItem("token");

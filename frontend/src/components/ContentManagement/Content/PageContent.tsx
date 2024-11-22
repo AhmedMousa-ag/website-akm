@@ -21,7 +21,7 @@ type PostContent = {
 export const PostContent = ({
   id,
   post_type,
-  sort_num,
+  // sort_num,
   title,
   summary,
   content,
@@ -37,12 +37,12 @@ export const PostContent = ({
   const dispatch = useDispatch<AppDispatch>();
   const token = localStorage.getItem("token");
 
-  let cssMargin = "";
-  if (sort_num % 2 === 0) {
-    cssMargin = "ml-60 mr-10 " + cssMargin;
-  } else {
-    cssMargin = "mr-60 ml-10 " + cssMargin;
-  }
+  const cssMargin = " ";
+  // if (sort_num % 2 === 0) {
+  //   cssMargin = "ml-60 mr-10 " + cssMargin;
+  // } else {
+  //   cssMargin = "mr-60 ml-10 " + cssMargin;
+  // }
 
   function toggleExpandContent() {
     setIsContentExpanded((prev) => !prev);

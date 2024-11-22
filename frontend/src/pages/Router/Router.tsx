@@ -26,7 +26,10 @@ export const router = createBrowserRouter([
             }
           >
             <HomePage>
-              <p className="opacity-100">Home Page....</p>
+              <div className="line-through animate-bounce animate-bounce-slow">
+                <p>Home Page....</p>
+                <p>Under Construction</p>
+              </div>
             </HomePage>
           </Suspense>
         ),

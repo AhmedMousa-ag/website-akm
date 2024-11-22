@@ -31,7 +31,7 @@ export const BasePage = ({
             </button>
           </div>
         ) : undefined}
-        <div className="flex justify-center">{children}</div>
+        <div>{children}</div>
       </div>
     </div>
   );
