@@ -6,4 +6,4 @@ file = "src/models/psql/schema.rs"
 custom_type_derives = ["diesel::query_builder::QueryId", "Clone"]
 
 [migrations_directory]
-dir = "C:\\Users\\akm\\Desktop\\Work\\personal\\website-akm\\backend\\rust-backend\\migrations"
+dir = "./migrations"
