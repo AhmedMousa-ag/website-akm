@@ -1,7 +1,6 @@
 // use std::fmt::Error;
 
 use diesel::prelude::*;
-use diesel::query_dsl::methods::FindDsl;
 use diesel::RunQueryDsl;
 
 use crate::{

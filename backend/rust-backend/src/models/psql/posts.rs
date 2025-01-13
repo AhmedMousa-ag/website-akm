@@ -2,7 +2,6 @@ use crate::models::psql::schema::posts;
 use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
-use utoipa::ToSchema;
 
 #[derive(Debug, Queryable, Selectable, Serialize)]
 #[diesel(table_name = posts)]

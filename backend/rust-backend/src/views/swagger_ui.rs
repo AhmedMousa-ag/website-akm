@@ -3,6 +3,7 @@ use crate::models::api_schema::posts::{AddPostRequest, AddPostResponse, GetPosts
 use crate::views::login;
 use crate::views::posts;
 use utoipa::OpenApi;
+use utoipa_swagger_ui::SwaggerUi;
 #[derive(OpenApi)]
 #[openapi(
     paths(login::login_view, posts::add_post, posts::get_posts, posts::delete_post, posts::update_post),
@@ -13,4 +14,8 @@ use utoipa::OpenApi;
         (name= "Ahmed Karem Mousa",description="Ahmed Karem Mousa Backend In Rust Website")
     )
 )]
-pub struct ApiDoc;
+struct ApiDoc;
+
+pub fn get_swagger_ui_router() -> SwaggerUi {
+    SwaggerUi::new("/docs").url("/api-doc/openapi.json", ApiDoc::openapi())
+}

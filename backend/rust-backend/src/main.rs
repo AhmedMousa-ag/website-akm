@@ -4,7 +4,8 @@ use axum::{
 };
 use http::Method;
 use rust_backend::{
-    configs::config, controller::utils::env_var::load_env_var, views::swagger_ui::ApiDoc,
+    configs::config, controller::utils::env_var::load_env_var,
+    views::swagger_ui::get_swagger_ui_router,
 };
 use rust_backend::{controller::db::startup::create_default_user, views::login::login_view};
 use rust_backend::{
@@ -12,8 +13,6 @@ use rust_backend::{
     views::posts::{add_post, delete_post, get_posts, update_post},
 };
 use tower_http::cors::{Any, CorsLayer};
-use utoipa::OpenApi;
-use utoipa_swagger_ui::SwaggerUi;
 
 #[tokio::main]
 async fn main() {
@@ -32,19 +31,13 @@ async fn main() {
         .allow_origin(Any);
     let app = Router::new()
         .route("/posts", post(add_post))
-        .route(
-            "/posts/",
-            patch(update_post).delete(delete_post),
-        ) //post(add_post)
+        .route("/posts/", patch(update_post).delete(delete_post))
         .route_layer(auth::AuthLayer)
-        .route(
-            "/posts/",
-            get(get_posts)
-        ) 
+        .route("/posts/", get(get_posts))
         .route("/health", get(|| async { "Healthy!" }))
         .route("/login", post(login_view))
         .route_layer(cors)
-        .merge(SwaggerUi::new("/docs").url("/api-doc/openapi.json", ApiDoc::openapi()));
+        .merge(get_swagger_ui_router());
 
     // run our app with hyper, listening globally on port 3000
     let host_port = format!("{}:{}", config.host, config.port);
