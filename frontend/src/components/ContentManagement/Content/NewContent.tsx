@@ -1,13 +1,10 @@
 import { useState } from "react";
-
 import { LoadingBouncer } from "../../Loading";
 import { useDispatch, useSelector } from "react-redux";
-// import { RootState } from "../../../state/store";
 import { changeIsEditing } from "../../../state/basePage";
 import VerifyAction from "../Modals/VerifyModal";
 import { patchPost, postPost } from "../../../state/posts/apiCalls";
 import { AppDispatch, RootState } from "../../../state/store";
-// import { addPost, updatePost } from "../../../state/posts/postsSlice";
 
 export const NewPost = ({
   post_type,
@@ -25,32 +22,19 @@ export const NewPost = ({
   const [title, setTitle] = useState(titleCom ?? "");
   const [content, setContent] = useState(contentCom ?? "");
   const [summary, setSummary] = useState(summaryCom ?? "");
-  // const [postPostMutation, { isLoading }] = usePostPostMutation();
   const [isVerifyModal, setIsVerifyModal] = useState(false);
-  // const [
-  //   usePatchPost,
-  // { isLoading: isLoadingPatch, isError: isErrorPatch, error: errorPatch },
-  // ] = usePatchPostMutation();
+
   const postState = useSelector((state: RootState) => state.postsState);
 
   const dispatch = useDispatch<AppDispatch>();
   function submitFn() {
     const postData = { title, content, summary, post_type };
     if (titleCom) {
-      // It means it's in editing state because it was passed from the parent
-      // const editedData = { body: postData };
-
-      // if (response.data) {
       dispatch(changeIsEditing(false));
-      // console.log(response.data.data);
       dispatch(patchPost({ body: { id, data: postData } }));
     } else {
-      // postPostMutation({ data: postData }).then((response) => {
-      // if (response.data) {
       dispatch(postPost({ body: { data: postData } }));
       dispatch(changeIsEditing(false));
-      // }
-      // });
     }
   }
   function cancelButton() {

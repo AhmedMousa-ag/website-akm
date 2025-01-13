@@ -33,19 +33,13 @@ export const InputModal = forwardRef<
       },
     };
   });
-  // Title
-  // Image
-  // Paragraph
-  //rounded-xl
+  
   return createPortal(
     <dialog ref={dialog}>
       <div className="font-montserrat text-white bg-black p-5 ">
         <h3 className="text-center text-2xl">{title}</h3>
         <br />
         <form
-          // onSubmit={(e: FormEvent<HTMLFormElement>) => {
-          //   onSubmitFn(e);
-          // }}
           onSubmit={(event) => onSubmitFn(event)}
         >
           <div className="flex space-y-3 flex-col gap-2">{children}</div>

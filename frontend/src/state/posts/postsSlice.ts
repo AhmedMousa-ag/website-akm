@@ -25,7 +25,6 @@ const PostsSlice = createSlice({
   initialState: PostsInitState,
   reducers: {},
   extraReducers: (builder) => {
-    //Fetch Post
     builder.addCase(fetchPosts.pending, (state) => {
       state.isLoading = true;
     });
@@ -36,7 +35,6 @@ const PostsSlice = createSlice({
       state.isLoading = false;
       state.error = action.error.message;
     });
-    // Post Post
     builder.addCase(postPost.pending, (state) => {
       state.isLoading = true;
     });
@@ -52,7 +50,6 @@ const PostsSlice = createSlice({
       state.isLoading = false;
       state.error = action.error.message;
     });
-    // Patch Post
     builder.addCase(patchPost.pending, (state) => {
       state.isLoading = true;
     });
@@ -74,7 +71,6 @@ const PostsSlice = createSlice({
       state.isLoading = false;
       state.error = action.error.message;
     });
-    // Delete Post
     builder.addCase(deletePost.pending, (state) => {
       state.isLoading = true;
     });

@@ -45,7 +45,6 @@ export const deletePost = createAsyncThunk(
       url: URL,
       headers: getHeaders(),
     });
-    // const data = await res.data;
     return { id };
   }
 );

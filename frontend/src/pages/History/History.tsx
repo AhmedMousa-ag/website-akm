@@ -3,23 +3,18 @@ import { BasePage } from "../../components/BasePage";
 import { PostContent } from "../../components/ContentManagement/Content/PageContent";
 import { AppDispatch, RootState } from "../../state/store";
 import { NewPost } from "../../components/ContentManagement/Content/NewContent";
-// import { useGetPostsQuery } from "../../state/posts/postsApiSlice";
 import { LoadingBouncer } from "../../components/Loading";
-// import { resetPostArr } from "../../state/posts/postsSlice";
 import { useEffect } from "react";
 import { fetchPosts } from "../../state/posts/apiCalls";
 
 export const HistoryPage = () => {
-  // const { data, isLoading } = useGetPostsQuery("history");
   const isEdittingState = useSelector(
     (state: RootState) => state.isEditing.isEditing
   );
   const posts = useSelector((state: RootState) => state.postsState);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    // if (!isLoading && data) {
     dispatch(fetchPosts("history"));
-    // }
   }, [dispatch]);
 
   return (

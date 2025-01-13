@@ -3,9 +3,7 @@ import { BasePage } from "../../components/BasePage";
 import { PostContent } from "../../components/ContentManagement/Content/PageContent";
 import { AppDispatch, RootState } from "../../state/store";
 import { NewPost } from "../../components/ContentManagement/Content/NewContent";
-// import { useGetPostsQuery } from "../../state/posts/postsApiSlice";
 import { LoadingBouncer } from "../../components/Loading";
-// import { resetPostArr } from "../../state/posts/postsSlice";
 import { useEffect } from "react";
 import { fetchPosts } from "../../state/posts/apiCalls";
 

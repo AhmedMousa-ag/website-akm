@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { useDeletePostMutation } from "../../../state/posts/postsApiSlice";
 import { LoadingBouncer } from "../../Loading";
 import { NewPost } from "./NewContent";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +7,6 @@ import { changeIsEditing } from "../../../state/basePage";
 import VerifyAction from "../Modals/VerifyModal";
 import { changeOpenModal } from "../../../state/modals/verifySlice";
 import { deletePost } from "../../../state/posts/apiCalls";
-// import { removePost } from "../../../state/posts/postsSlice";
 type PostContent = {
   id: number;
   post_type: string;
@@ -21,38 +19,27 @@ type PostContent = {
 export const PostContent = ({
   id,
   post_type,
-  // sort_num,
   title,
   summary,
   content,
 }: PostContent) => {
-  // If logged in show edit, delete
   const [isContentExpanded, setIsContentExpanded] = useState(false);
   const [isVerifyModal, setIsVerifyModal] = useState(false);
   const isEdittingState = useSelector(
     (state: RootState) => state.isEditing.isEditing
   );
   const deleteState = useSelector((state: RootState) => state.postsState);
-  // const [useDeleteHistory, { isLoading, isError }] = useDeletePostMutation();
   const dispatch = useDispatch<AppDispatch>();
   const token = localStorage.getItem("token");
-
   const cssMargin = " ";
-  // if (sort_num % 2 === 0) {
-  //   cssMargin = "ml-60 mr-10 " + cssMargin;
-  // } else {
-  //   cssMargin = "mr-60 ml-10 " + cssMargin;
-  // }
 
   function toggleExpandContent() {
     setIsContentExpanded((prev) => !prev);
   }
 
   function onDeleteButton() {
-    // useDeleteHistory(id).then(() => {
     dispatch(changeOpenModal(false));
     dispatch(deletePost({ id }));
-    // });
   }
 
   function onEditButton() {
