@@ -12,7 +12,7 @@ import { LoadingBouncer } from "../../components/Loading";
 
 export const Login = () => {
   const isLoggedIn = useSelector(
-    (state: RootState) => state.isLoggedIn.isLoggedIn
+    (state: RootState) => state.isLoggedIn.isLoggedIn,
   );
   const dispatch = useDispatch();
   const dialogRef = useRef<OpenImperativeHandle>(null);
@@ -35,7 +35,7 @@ export const Login = () => {
     navigate("/");
   };
   const handleLoginButton: React.FormEventHandler<HTMLFormElement> = (
-    event
+    event,
   ) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

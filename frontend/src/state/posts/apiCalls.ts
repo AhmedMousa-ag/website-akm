@@ -19,7 +19,7 @@ export const fetchPosts = createAsyncThunk(
     const res = await axios({ url: URL, headers: getHeaders() });
     const data = await res.data;
     return data;
-  }
+  },
 );
 
 export const patchPost = createAsyncThunk(
@@ -34,7 +34,7 @@ export const patchPost = createAsyncThunk(
     });
     const data = await res.data;
     return data;
-  }
+  },
 );
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
@@ -46,7 +46,7 @@ export const deletePost = createAsyncThunk(
       headers: getHeaders(),
     });
     return { id };
-  }
+  },
 );
 
 export const postPost = createAsyncThunk(
@@ -61,5 +61,31 @@ export const postPost = createAsyncThunk(
     });
     const data = await res.data;
     return data;
-  }
+  },
+);
+
+export const uploadPostPic = createAsyncThunk(
+  "posts/postPic",
+  async ({
+    post_type,
+    id,
+    file,
+  }: {
+    post_type: string;
+    id: number;
+    file: File;
+  }) => {
+    const URL = `${BACKEDN_URL}/posts/upload_img/?post_type=${post_type}&id=${id}`;
+    const headers = {
+      Authorization: getHeaders().Authorization,
+      "Content-Type": "multipart/form-data",
+    };
+    const formData = new FormData();
+    formData.append("image", file);
+    const res = await axios.post(URL, formData, { headers: headers });
+    console.log("result: ");
+    console.log(res);
+    const data = await res.data;
+    return data;
+  },
 );

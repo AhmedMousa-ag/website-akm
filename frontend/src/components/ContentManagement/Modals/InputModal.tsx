@@ -33,20 +33,18 @@ export const InputModal = forwardRef<
       },
     };
   });
-  
+
   return createPortal(
     <dialog ref={dialog}>
       <div className="font-montserrat text-white bg-black p-5 ">
         <h3 className="text-center text-2xl">{title}</h3>
         <br />
-        <form
-          onSubmit={(event) => onSubmitFn(event)}
-        >
+        <form onSubmit={(event) => onSubmitFn(event)}>
           <div className="flex space-y-3 flex-col gap-2">{children}</div>
           {buttonsChildren}
         </form>
       </div>
     </dialog>,
-    document.getElementById("modal")!
+    document.getElementById("modal")!,
   );
 });

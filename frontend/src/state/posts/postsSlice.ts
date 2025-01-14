@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { deletePost, fetchPosts, patchPost, postPost } from "./apiCalls";
+import {
+  deletePost,
+  fetchPosts,
+  patchPost,
+  postPost,
+  uploadPostPic,
+} from "./apiCalls";
 import { PostContentResponse } from "../../types/apis/content";
 
 export interface PostStateType {
@@ -8,6 +14,7 @@ export interface PostStateType {
   summary: string;
   content: string;
   post_type: string;
+  image_url: string;
 }
 
 const PostsInitState: {
@@ -44,7 +51,7 @@ const PostsSlice = createSlice({
         const postsData = action.payload.data;
         (state.isLoading = false),
           (state.content = [...state.content, postsData]);
-      }
+      },
     );
     builder.addCase(postPost.rejected, (state, action) => {
       state.isLoading = false;
@@ -65,7 +72,7 @@ const PostsSlice = createSlice({
               return post;
             }
           }));
-      }
+      },
     );
     builder.addCase(patchPost.rejected, (state, action) => {
       state.isLoading = false;
@@ -80,9 +87,24 @@ const PostsSlice = createSlice({
         const postId = action.payload.id;
         state.isLoading = false;
         state.content = state.content.filter((post) => post.id !== postId);
-      }
+      },
     );
     builder.addCase(deletePost.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    //=============
+    builder.addCase(uploadPostPic.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      uploadPostPic.fulfilled,
+      (state, action: PayloadAction<{ id: number }>) => {
+        const postId = action.payload.id;
+        //TODO
+      },
+    );
+    builder.addCase(uploadPostPic.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message;
     });

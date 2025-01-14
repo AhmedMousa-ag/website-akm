@@ -9,7 +9,7 @@ import { fetchPosts } from "../../state/posts/apiCalls";
 
 export const PersonalProjects = () => {
   const isEdittingState = useSelector(
-    (state: RootState) => state.isEditing.isEditing
+    (state: RootState) => state.isEditing.isEditing,
   );
   const posts = useSelector((state: RootState) => state.postsState);
   const dispatch = useDispatch<AppDispatch>();
@@ -35,6 +35,7 @@ export const PersonalProjects = () => {
                   title={project.title}
                   summary={project.summary}
                   content={project.content}
+                  img_url={project.image_url}
                 />
               )
             );

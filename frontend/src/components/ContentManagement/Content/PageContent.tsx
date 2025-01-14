@@ -14,6 +14,7 @@ type PostContent = {
   title: string;
   summary: string;
   content: string;
+  img_url: string;
 };
 
 export const PostContent = ({
@@ -22,20 +23,16 @@ export const PostContent = ({
   title,
   summary,
   content,
+  img_url,
 }: PostContent) => {
-  const [isContentExpanded, setIsContentExpanded] = useState(false);
   const [isVerifyModal, setIsVerifyModal] = useState(false);
   const isEdittingState = useSelector(
-    (state: RootState) => state.isEditing.isEditing
+    (state: RootState) => state.isEditing.isEditing,
   );
   const deleteState = useSelector((state: RootState) => state.postsState);
   const dispatch = useDispatch<AppDispatch>();
   const token = localStorage.getItem("token");
   const cssMargin = " ";
-
-  function toggleExpandContent() {
-    setIsContentExpanded((prev) => !prev);
-  }
 
   function onDeleteButton() {
     dispatch(changeOpenModal(false));
@@ -45,7 +42,6 @@ export const PostContent = ({
   function onEditButton() {
     dispatch(changeIsEditing(true));
   }
-  const contentParagraph = !isContentExpanded ? summary : content;
   return (
     <>
       {isEdittingState ? (
@@ -93,16 +89,11 @@ export const PostContent = ({
                 {deleteState.error && <p>Error</p>}
               </div>
             )}
-            <title>{title}</title>
-            <p>{title}</p>
-            {
-              <button
-                className="text-lg hover:bg-gray-600 rounded"
-                onClick={toggleExpandContent}
-              >
-                {contentParagraph}
-              </button>
-            }
+            <article>
+              <p className="text-2xl font-bold">{title}</p>
+              {img_url ? <img src={img_url} alt={post_type + id} /> : ""}
+              <p className="clear-left text-lg">{content}</p>
+            </article>
           </div>
         </div>
       )}

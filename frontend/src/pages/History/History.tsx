@@ -9,7 +9,7 @@ import { fetchPosts } from "../../state/posts/apiCalls";
 
 export const HistoryPage = () => {
   const isEdittingState = useSelector(
-    (state: RootState) => state.isEditing.isEditing
+    (state: RootState) => state.isEditing.isEditing,
   );
   const posts = useSelector((state: RootState) => state.postsState);
   const dispatch = useDispatch<AppDispatch>();
@@ -36,6 +36,7 @@ export const HistoryPage = () => {
                   title={history.title}
                   summary={history.summary}
                   content={history.content}
+                  img_url={history.image_url}
                 />
               )
             );

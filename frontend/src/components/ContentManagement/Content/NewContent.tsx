@@ -3,7 +3,11 @@ import { LoadingBouncer } from "../../Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { changeIsEditing } from "../../../state/basePage";
 import VerifyAction from "../Modals/VerifyModal";
-import { patchPost, postPost } from "../../../state/posts/apiCalls";
+import {
+  patchPost,
+  postPost,
+  uploadPostPic,
+} from "../../../state/posts/apiCalls";
 import { AppDispatch, RootState } from "../../../state/store";
 
 export const NewPost = ({
@@ -23,17 +27,38 @@ export const NewPost = ({
   const [content, setContent] = useState(contentCom ?? "");
   const [summary, setSummary] = useState(summaryCom ?? "");
   const [isVerifyModal, setIsVerifyModal] = useState(false);
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const postState = useSelector((state: RootState) => state.postsState);
-
   const dispatch = useDispatch<AppDispatch>();
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      setSelectedFile(file);
+    }
+  };
+
   function submitFn() {
     const postData = { title, content, summary, post_type };
     if (titleCom) {
       dispatch(changeIsEditing(false));
       dispatch(patchPost({ body: { id, data: postData } }));
+      if (selectedFile) {
+        dispatch(uploadPostPic({ post_type, id: id!, file: selectedFile }));
+      }
     } else {
-      dispatch(postPost({ body: { data: postData } }));
+      const fireRequest = async () => {
+        const response = await dispatch(postPost({ body: { data: postData } }));
+        if (selectedFile) {
+          dispatch(
+            uploadPostPic({
+              post_type,
+              id: response.payload.data.id,
+              file: selectedFile,
+            }),
+          );
+        }
+      };
+      fireRequest();
       dispatch(changeIsEditing(false));
     }
   }
@@ -59,6 +84,8 @@ export const NewPost = ({
             "flex flex-col  h-auto border border-yellow-900 rounded-lg dark:bg-gray-800 dark:border-yellow-900"
           }
         >
+          <p>Upload File</p>
+          <input type="file" onChange={handleFileChange} accept="image/*" />
           <label>Title</label>
 
           <textarea

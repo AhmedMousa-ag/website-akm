@@ -10,7 +10,7 @@ export const BasePage = ({
   cssClass?: string;
 }) => {
   const isEdittingState = useSelector(
-    (state: RootState) => state.isEditing.isEditing
+    (state: RootState) => state.isEditing.isEditing,
   );
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");

@@ -6,7 +6,6 @@ export type OpenImperativeHandle = {
   toggle: () => void;
 };
 
-
 export type FormInputChildren = {
   title: HTMLLabelElement;
   input: HTMLInputElement;
