@@ -8,7 +8,11 @@ pub struct AddPostRequest {
     pub summary: String,
     pub post_type: String,
 }
-
+#[derive(Debug, Deserialize, ToSchema)]
+pub struct ImageUpload {
+    #[schema(content_media_type = "application/octet-stream")]
+    pub image: Vec<u8>,
+}
 pub struct PostTypeEnum;
 impl PostTypeEnum {
     pub const HISTORY: &str = "history";

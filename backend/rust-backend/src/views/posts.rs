@@ -1,4 +1,5 @@
-use crate::models::api_schema::posts::{PostParams, PostTypeEnum};
+use crate::controller::utils::util::construct_post_img_path;
+use crate::models::api_schema::posts::{ImageUpload, PostParams, PostTypeEnum};
 use crate::models::psql::posts::{EditPost, Posts};
 use crate::{
     controller::apis_logic::posts::{create_post, delete_db_post, get_posts_type, update_db_post},
@@ -8,9 +9,67 @@ use crate::{
     },
 };
 use axum::extract::Query;
-use axum::{extract::Json, http::StatusCode, response};
+use axum::{extract::Json, extract::Multipart, http::StatusCode, response};
+// use futures_util::stream::StreamExt;
 use serde_json::{json, Value};
+use std::fs::File;
+use std::io::Write; // bring trait into scope
 use std::time::SystemTime;
+
+#[utoipa::path(
+    post,
+    path = "/posts/upload_img/{post_type}/{id}",
+    params(("post_type" = String, Query, description = "Post Type"),("id"=String,Query,description="Post Id")),
+    request_body(content_type = "multipart/form-data", content = inline(ImageUpload), description = "Images to upload"),
+    responses(
+        (status = 200, description = "Successfull uploaded image", body = AddPostResponse),
+        // (status = NOT_FOUND, description = "Invalide Post")
+    ),
+)]
+pub async fn upload_post_image(
+    Query(params): Query<PostParams>,
+    mut image: Multipart,
+) -> (StatusCode, response::Json<Value>) {
+    let file_path = construct_post_img_path(params);
+    let mut response = (
+        StatusCode::OK,
+        Json(json!(AddPostResponse {
+            data: None,
+            status: true,
+            error: None
+        })),
+    );
+    while let Some(field) = image.next_field().await.unwrap() {
+        // let name = field.name().unwrap().to_string();
+        let file_name = field.file_name().unwrap().to_string();
+        let data_bytes = field.bytes().await.unwrap();
+        let complete_file_path = format!("{:}{:}", file_path, file_name);
+        let mut image_file = File::create(complete_file_path).unwrap();
+        response = match image_file.write_all(&data_bytes) {
+            Ok(_) => (
+                StatusCode::OK,
+                Json(json!(AddPostResponse {
+                    data: None,
+                    status: true,
+                    error: None
+                })),
+            ),
+            Err(e) => (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!(AddPostResponse {
+                    data: None,
+                    status: false,
+                    error: Some(format!(
+                        "{:?}{:?}",
+                        "Error writting image into database: ", e
+                    ))
+                })),
+            ),
+        };
+    }
+
+    return response;
+}
 
 #[utoipa::path(
     post,

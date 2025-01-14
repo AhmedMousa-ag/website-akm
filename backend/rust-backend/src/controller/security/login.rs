@@ -10,7 +10,7 @@ use crate::models::security::{JWTOperations, UserAuth};
 impl JWTOperations<UserAuth> for UserAuth {
     fn sign(&self) -> String {
         let config = get_config();
-        let key: Hmac<Sha256> = Hmac::new_from_slice(config.jwt_pub_key.as_bytes())
+        let key: Hmac<Sha256> = Hmac::new_from_slice(config.operation.jwt_pub_key.as_bytes())
             .expect("HMAC can take key of any size");
         let signed_claim: String = self
             .sign_with_key(&key)
@@ -20,7 +20,7 @@ impl JWTOperations<UserAuth> for UserAuth {
     }
     fn validate_token(&self, token: String) -> (bool, Option<UserAuth>) {
         let config = get_config();
-        let key: Hmac<Sha256> = Hmac::new_from_slice(config.jwt_pub_key.as_bytes())
+        let key: Hmac<Sha256> = Hmac::new_from_slice(config.operation.jwt_pub_key.as_bytes())
             .expect("HMAC can take key of any size");
         let claims: Result<UserAuth, jwt::Error> = token.verify_with_key(&key);
         if claims.is_err() {

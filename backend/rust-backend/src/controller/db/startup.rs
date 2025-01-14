@@ -30,13 +30,13 @@ pub fn create_default_user() {
         println!("No users found, will create new ones...");
         let config = get_config();
         let hashed_password = Password {
-            pass: config.default_password.clone(),
+            pass: config.operation.default_password.clone(),
         };
         let hashed_pass = hashed_password.hash_salt_password();
         let new_user = NewUser {
-            username: &config.default_username,
+            username: &config.operation.default_username,
             password: &hashed_pass,
-            email: &config.default_email,
+            email: &config.operation.default_email,
         };
         let insertion_res = diesel::insert_into(users::table)
             .values(&new_user)

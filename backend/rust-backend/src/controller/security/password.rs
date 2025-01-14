@@ -17,7 +17,7 @@ impl Password {
 impl PasswordsProtection for Password {
     fn hash_salt_password(&self) -> String {
         let configs = get_config();
-        let salted_text = configs.salting_text.as_str();
+        let salted_text = configs.operation.salting_text.as_str();
         let (first_idx, second_idx) = salted_idx(salted_text.to_string());
         let mut salted_pass = String::new();
         let first_part_salt: &str = &salted_text[..first_idx];

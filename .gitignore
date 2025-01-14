@@ -47,3 +47,5 @@ Cargo.lock
 .env
 # Diesel Migraions
 00000000000000_diesel_initial_setup
+
+backend/rust-backend/images/*

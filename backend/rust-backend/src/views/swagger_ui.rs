@@ -6,7 +6,7 @@ use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 #[derive(OpenApi)]
 #[openapi(
-    paths(login::login_view, posts::add_post, posts::get_posts, posts::delete_post, posts::update_post),
+    paths(login::login_view, posts::add_post, posts::get_posts, posts::delete_post, posts::update_post, posts::upload_post_image),
     components(
         schemas(LoginRequest,LoginResponse,AddPostRequest,AddPostResponse,GetPostsResponse)
     ),

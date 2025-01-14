@@ -15,7 +15,7 @@ pub trait JWTOperations<T> {
     fn validate_token(&self, token: String) -> (bool, Option<T>);
     fn get_algo(&self) -> Algorithm {
         let configs = get_config();
-        let algo: Algorithm = match configs.jwt_algo.as_str() {
+        let algo: Algorithm = match configs.operation.jwt_algo.as_str() {
             "HS256" => Algorithm::HS256,
             "ES256" => Algorithm::ES256,
             "HS384" => Algorithm::HS384,

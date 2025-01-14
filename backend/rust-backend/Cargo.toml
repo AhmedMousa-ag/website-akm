@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = "0.8.1"
+axum = { version = "0.8.1", features = ["multipart"] }
 bytes = "1.8.0"
 diesel = { version = "2.2.4", features = ["postgres"] }
 diesel_migrations = "2.2.0"
