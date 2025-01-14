@@ -21,11 +21,7 @@ impl PostTypeEnum {
 
 impl PostTypeEnum {
     pub fn is_valid_type(&self, post_type: &str) -> bool {
-        match post_type {
-            PostTypeEnum::HISTORY => true,
-            PostTypeEnum::PROJECT => true,
-            _ => false,
-        }
+        matches!(post_type, PostTypeEnum::HISTORY | PostTypeEnum::PROJECT,)
     }
 }
 #[derive(Serialize, ToSchema)]

@@ -7,7 +7,7 @@ Returns true if valide auth and the second boolean for the subscription
 */
 pub fn validate_jwt_sub(req: &Request) -> bool {
     //-> Result<bool,ErrorKind> {
-    let token = util::get_auth_header_token(&req);
+    let token = util::get_auth_header_token(req);
 
     let user = UserAuth {
         user_id: None,

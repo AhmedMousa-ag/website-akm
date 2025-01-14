@@ -17,13 +17,7 @@ pub fn create_default_user() {
         .load::<String>(conn);
 
     let is_user_in_sys = match all_users {
-        Ok(users) => {
-            if users.len() < 1 {
-                false
-            } else {
-                true
-            }
-        }
+        Ok(users) => users.is_empty(),
         Err(e) => panic!("{:?}", e),
     };
     if !is_user_in_sys {

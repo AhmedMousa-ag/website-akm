@@ -22,7 +22,7 @@ pub trait JWTOperations<T> {
             "RS256" => Algorithm::RS256,
             _ => Algorithm::HS256,
         };
-        return algo;
+        algo
     }
 }
 

@@ -50,11 +50,7 @@ pub async fn upload_post_image(
         response = match image_file.write_all(&data_bytes) {
             Ok(_) => (
                 StatusCode::OK,
-                Json(json!(AddPostResponse {
-                    data: None,
-                    status: true,
-                    error: None
-                })),
+                Json(json!({"image_url":complete_file_path})),
             ),
             Err(e) => (
                 StatusCode::INTERNAL_SERVER_ERROR,
@@ -84,7 +80,7 @@ pub async fn upload_post_image(
             })),
         );
     }
-    return response;
+    response
 }
 
 #[utoipa::path(
@@ -179,7 +175,7 @@ pub async fn get_posts(Query(params): Query<PostParams>) -> (StatusCode, respons
     let result = get_posts_type(post_type.to_string());
     match result {
         Ok(posts) => {
-            if posts.len() < 1 {
+            if posts.is_empty() {
                 return (
                     StatusCode::NOT_FOUND,
                     Json(json!(GetPostsResponse {
