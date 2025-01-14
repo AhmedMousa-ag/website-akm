@@ -45,7 +45,7 @@ async fn main() {
         .route("/login", post(login_view))
         .layer(DefaultBodyLimit::max(20 * 1024 * 1024))
         .route_layer(cors)
-        .nest("/posts", serve_images())
+        .merge(serve_images())
         .merge(get_swagger_ui_router());
 
     // run our app with hyper, listening globally on port 3000
