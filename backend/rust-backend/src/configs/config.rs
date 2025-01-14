@@ -40,7 +40,7 @@ static CONFIGURATIONS: LazyLock<Config> = LazyLock::new(|| Config {
         default_email: env_var::load_default_email(),
     },
     posts: PostsConfig {
-        img_base_path: "./images/posts/".into(),
+        img_base_path: "images/posts/".into(),
     },
 });
 
