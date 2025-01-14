@@ -7,7 +7,10 @@ use http::Method;
 use rust_backend::{
     configs::config,
     controller::utils::env_var::load_env_var,
-    views::{posts::upload_post_image, swagger_ui::get_swagger_ui_router},
+    views::{
+        posts::{serve_images, upload_post_image},
+        swagger_ui::get_swagger_ui_router,
+    },
 };
 use rust_backend::{controller::db::startup::create_default_user, views::login::login_view};
 use rust_backend::{
@@ -34,6 +37,7 @@ async fn main() {
     let app = Router::new()
         .route("/posts", post(add_post))
         .route("/posts/upload_img/", post(upload_post_image))
+        // .route("/posts/download_img/{img_path}", get(download_img))
         .route("/posts/", patch(update_post).delete(delete_post))
         .route_layer(auth::AuthLayer)
         .route("/posts/", get(get_posts))
@@ -41,6 +45,7 @@ async fn main() {
         .route("/login", post(login_view))
         .layer(DefaultBodyLimit::max(20 * 1024 * 1024))
         .route_layer(cors)
+        .nest("/posts", serve_images())
         .merge(get_swagger_ui_router());
 
     // run our app with hyper, listening globally on port 3000

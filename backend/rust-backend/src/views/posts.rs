@@ -10,12 +10,14 @@ use crate::{
     },
 };
 use axum::extract::Query;
+use axum::Router;
 use axum::{extract::Json, extract::Multipart, http::StatusCode, response};
 // use futures_util::stream::StreamExt;
 use serde_json::{json, Value};
 use std::fs::File;
 use std::io::Write; // bring trait into scope
 use std::time::SystemTime;
+use tower_http::services::ServeDir;
 
 #[utoipa::path(
     post,
@@ -83,6 +85,13 @@ pub async fn upload_post_image(
     response
 }
 
+pub fn serve_images() -> Router {
+    // serve the file in the "assets" directory under `/assets`
+    Router::new().nest_service("/images", ServeDir::new("images/"))
+}
+// response.body_mut().into_data_stream();
+
+// response
 #[utoipa::path(
     post,
     path = "/posts",
