@@ -62,6 +62,8 @@ diesel::table! {
         post_type -> Text,
         created_at -> Nullable<Timestamp>,
         edited_at -> Nullable<Timestamp>,
+        #[max_length = 6000]
+        img_url -> Nullable<Varchar>,
     }
 }
 

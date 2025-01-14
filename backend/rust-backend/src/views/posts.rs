@@ -1,3 +1,4 @@
+use crate::controller::apis_logic::posts::update_post_img_url;
 use crate::controller::utils::util::construct_post_img_path;
 use crate::models::api_schema::posts::{ImageUpload, PostParams, PostTypeEnum};
 use crate::models::psql::posts::{EditPost, Posts};
@@ -30,7 +31,7 @@ pub async fn upload_post_image(
     Query(params): Query<PostParams>,
     mut image: Multipart,
 ) -> (StatusCode, response::Json<Value>) {
-    let file_path = construct_post_img_path(params);
+    let file_path = construct_post_img_path(&params);
     let mut response = (
         StatusCode::OK,
         Json(json!(AddPostResponse {
@@ -39,12 +40,13 @@ pub async fn upload_post_image(
             error: None
         })),
     );
+    let mut complete_file_path = String::new();
     while let Some(field) = image.next_field().await.unwrap() {
         // let name = field.name().unwrap().to_string();
         let file_name = field.file_name().unwrap().to_string();
         let data_bytes = field.bytes().await.unwrap();
-        let complete_file_path = format!("{:}{:}", file_path, file_name);
-        let mut image_file = File::create(complete_file_path).unwrap();
+        complete_file_path = format!("{:}{:}", file_path, file_name);
+        let mut image_file = File::create(complete_file_path.clone()).unwrap();
         response = match image_file.write_all(&data_bytes) {
             Ok(_) => (
                 StatusCode::OK,
@@ -67,7 +69,21 @@ pub async fn upload_post_image(
             ),
         };
     }
-
+    let db_res = update_post_img_url(params.id.unwrap(), &complete_file_path);
+    if db_res.is_err() {
+        return (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!(AddPostResponse {
+                data: None,
+                status: false,
+                error: Some(format!(
+                    "{:?}{:?}",
+                    "Error writting image into database: ",
+                    db_res.err()
+                ))
+            })),
+        );
+    }
     return response;
 }
 
@@ -91,12 +107,14 @@ pub async fn add_post(Json(payload): Json<AddPostRequest>) -> (StatusCode, respo
             })),
         );
     }
+
     let created_post: Result<Posts, diesel::result::Error> = create_post(NewPost {
         title: &payload.title,
         content: &payload.content,
         summary: &payload.summary,
         post_type: &payload.post_type,
         created_at: &SystemTime::now(),
+        img_url: None,
     });
     match created_post {
         Ok(post) => (
@@ -107,7 +125,8 @@ pub async fn add_post(Json(payload): Json<AddPostRequest>) -> (StatusCode, respo
                     title: post.title,
                     content: post.content,
                     summary: post.summary,
-                    post_type: post.post_type
+                    post_type: post.post_type,
+                    img_url: None,
                 }),
                 status: true,
                 error: None
@@ -139,7 +158,7 @@ pub async fn get_posts(Query(params): Query<PostParams>) -> (StatusCode, respons
     if unwraped_post.is_none() {
         return (
             StatusCode::NOT_ACCEPTABLE,
-            Json(json!(AddPostResponse {
+            Json(json!(GetPostsResponse {
                 data: None,
                 status: false,
                 error: Some(format!("{:?}", "Post Type is requierd"))
@@ -150,7 +169,7 @@ pub async fn get_posts(Query(params): Query<PostParams>) -> (StatusCode, respons
     if !PostTypeEnum.is_valid_type(post_type.as_str()) {
         return (
             StatusCode::NOT_ACCEPTABLE,
-            Json(json!(AddPostResponse {
+            Json(json!(GetPostsResponse {
                 data: None,
                 status: false,
                 error: Some(format!("{:?}", "Post Type is invalid"))

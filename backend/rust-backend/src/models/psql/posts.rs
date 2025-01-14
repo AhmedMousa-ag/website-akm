@@ -14,6 +14,7 @@ pub struct Posts {
     pub post_type: String,
     pub created_at: Option<SystemTime>,
     pub edited_at: Option<SystemTime>,
+    pub img_url: Option<String>,
 }
 
 #[derive(Debug, Insertable, Serialize)]
@@ -24,6 +25,7 @@ pub struct NewPost<'a> {
     pub summary: &'a str,
     pub post_type: &'a str,
     pub created_at: &'a SystemTime,
+    pub img_url: Option<&'a str>,
 }
 
 #[derive(Debug, AsChangeset, Serialize, Deserialize)]
@@ -35,4 +37,5 @@ pub struct EditPost {
     pub post_type: Option<String>,
     pub created_at: Option<SystemTime>,
     pub edited_at: Option<SystemTime>,
+    pub img_url: Option<String>,
 }

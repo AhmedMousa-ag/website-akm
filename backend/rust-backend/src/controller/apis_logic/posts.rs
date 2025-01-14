@@ -29,6 +29,14 @@ pub fn get_posts_type(post_type: String) -> Result<Vec<Posts>, diesel::result::E
     posts
 }
 
+pub fn update_post_img_url(id: i32, new_url: &str) -> Result<Posts, diesel::result::Error> {
+    let conn = &mut psql_connection();
+    let post: Result<Posts, diesel::result::Error> =
+        diesel::update(posts::table.filter(posts::id.eq(id)))
+            .set(posts::img_url.eq(new_url))
+            .get_result(conn);
+    post
+}
 pub fn update_db_post(id: i32, new_data: EditPost) -> Result<Posts, diesel::result::Error> {
     let conn = &mut psql_connection();
     let post: Result<Posts, diesel::result::Error> =

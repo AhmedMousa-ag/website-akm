@@ -1,0 +1,1 @@
+ALTER TABLE posts ADD img_url varchar(6000);

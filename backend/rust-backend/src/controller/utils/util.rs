@@ -15,11 +15,11 @@ pub fn get_auth_header_token<'a>(req: &hyper::Request<axum::body::Body>) -> &str
     return token_vec[1];
 }
 
-pub fn construct_post_img_path(params: PostParams) -> String {
+pub fn construct_post_img_path(params: &PostParams) -> String {
     let directory = format!(
         "{}{}/{}/",
         get_config().posts.img_base_path,
-        params.post_type.unwrap(),
+        params.post_type.clone().unwrap(),
         params.id.unwrap()
     );
     match fs::create_dir_all(directory.clone()) {

@@ -35,6 +35,7 @@ pub struct Post {
     pub content: String,
     pub summary: String,
     pub post_type: String,
+    pub img_url: Option<String>,
 }
 #[derive(Serialize, ToSchema)]
 pub struct AddPostResponse {
