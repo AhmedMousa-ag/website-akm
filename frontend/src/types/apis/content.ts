@@ -15,7 +15,7 @@ export type PostContentResponse = {
     content: string;
     summary: string;
     post_type: string;
-    image_url: string;
+    img_url: string;
   };
   status: boolean;
   error: string | undefined;

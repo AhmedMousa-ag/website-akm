@@ -14,7 +14,7 @@ export interface PostStateType {
   summary: string;
   content: string;
   post_type: string;
-  image_url: string;
+  img_url: string;
 }
 
 const PostsInitState: {
@@ -99,9 +99,14 @@ const PostsSlice = createSlice({
     });
     builder.addCase(
       uploadPostPic.fulfilled,
-      (state, action: PayloadAction<{ id: number }>) => {
-        const postId = action.payload.id;
-        //TODO
+      (state, action: PayloadAction<PostStateType>) => {
+        //TODO double check
+        state.content = state.content.map((post) => {
+          if (post.id == action.payload.id) {
+            post.img_url = action.payload.img_url;
+          }
+          return post;
+        });
       },
     );
     builder.addCase(uploadPostPic.rejected, (state, action) => {

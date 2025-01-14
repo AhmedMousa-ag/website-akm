@@ -7,6 +7,7 @@ import { changeIsEditing } from "../../../state/basePage";
 import VerifyAction from "../Modals/VerifyModal";
 import { changeOpenModal } from "../../../state/modals/verifySlice";
 import { deletePost } from "../../../state/posts/apiCalls";
+import { BACKEDN_URL } from "../../../configs/constanst";
 type PostContent = {
   id: number;
   post_type: string;
@@ -91,7 +92,11 @@ export const PostContent = ({
             )}
             <article>
               <p className="text-2xl font-bold">{title}</p>
-              {img_url ? <img src={img_url} alt={post_type + id} /> : ""}
+              {img_url ? (
+                <img src={`${BACKEDN_URL}/${img_url}`} alt={post_type + id} />
+              ) : (
+                ""
+              )}
               <p className="clear-left text-lg">{content}</p>
             </article>
           </div>

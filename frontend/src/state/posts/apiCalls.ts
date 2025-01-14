@@ -83,8 +83,6 @@ export const uploadPostPic = createAsyncThunk(
     const formData = new FormData();
     formData.append("image", file);
     const res = await axios.post(URL, formData, { headers: headers });
-    console.log("result: ");
-    console.log(res);
     const data = await res.data;
     return data;
   },
