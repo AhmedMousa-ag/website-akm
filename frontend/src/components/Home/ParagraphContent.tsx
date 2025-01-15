@@ -5,7 +5,7 @@ export const PargraphContent = ({
   extraCss,
 }: {
   children: ReactNode;
-  extraCss?: String;
+  extraCss?: string;
 }) => {
   const clasName =
     "border border-gray-200 rounded-lg dark:border-gray-100 max-w-screen-lg text-xl " +

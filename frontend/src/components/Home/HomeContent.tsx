@@ -1,5 +1,4 @@
 import { PargraphContent } from "./ParagraphContent";
-
 export const HomePageContent = () => {
   return (
     <div>
@@ -17,12 +16,13 @@ export const HomePageContent = () => {
           If you need help, feel free to contact me
         </a>
       </PargraphContent>
-      {/* <PargraphContent>
+      <PargraphContent>
+        <p>Certified by google in Tensorflow Machine Learning,</p>
         <p>
-          Pursuing a Master's in Computer Science to complement my Bachelor's in
-          Agricultural Science.<br/> Ah and Also seekings a masters in Breeding
+          Pursuing a Master's in both Agriculture sciences and Computer Science to complement my Bachelor's in
+          Agricultural Science.
         </p>
-      </PargraphContent> */}
+      </PargraphContent>
     </div>
   );
 };
