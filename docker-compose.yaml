@@ -13,15 +13,17 @@ services:
     build: ./frontend
     ports:
       - "80:80"
-    depends_on:
-      - akm-backend-rust
+#    depends_on:
+#      - akm-backend-rust
     restart: "always"
     links:
       - "akm-backend-rust:backend"
   #----------------------------------------
   akm-backend-rust:
     <<: *env
-    build: ./backend/rust-backend
+    build:
+      context: ./backend/rust-backend/
+      dockerfile: Dockerfile.prebuilt
     container_name: akm-backend-rust
     ports:
       - "8000:8000"
@@ -37,7 +39,7 @@ services:
     container_name: init-db
     build:
       context: ./backend/rust-backend/
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prebuilt
     command: "bash diesel_migrations.sh"
     depends_on:
       database:
