@@ -16,11 +16,11 @@ pub fn create_default_user() {
         .limit(1)
         .load::<String>(conn);
 
-    let is_user_in_sys = match all_users {
-        Ok(users) => users.is_empty(),
+    let is_user_in_sys = match &all_users {
+        Ok(users) => users,
         Err(e) => panic!("{:?}", e),
     };
-    if !is_user_in_sys {
+    if is_user_in_sys.len() < 1 {
         println!("No users found, will create new ones...");
         let config = get_config();
         let hashed_password = Password {
@@ -39,6 +39,7 @@ pub fn create_default_user() {
             panic!("Error inserting default user into the system, you need at least one user in the system");
         }
     } else {
+        println!("{:?}", all_users);
         println!("There're users already in the system...")
     }
 }
