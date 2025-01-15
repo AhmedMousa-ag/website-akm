@@ -35,7 +35,7 @@ export const PersonalProjects = () => {
                   title={project.title}
                   summary={project.summary}
                   content={project.content}
-                  img_url={project.image_url}
+                  img_url={project.img_url}
                 />
               )
             );
