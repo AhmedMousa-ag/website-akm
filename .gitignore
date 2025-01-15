@@ -49,3 +49,5 @@ Cargo.lock
 00000000000000_diesel_initial_setup
 
 backend/rust-backend/images/*
+backend/rust-backend/release
+!backend/rust-backend/release/rust-backend

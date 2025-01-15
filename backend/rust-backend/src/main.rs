@@ -37,14 +37,13 @@ async fn main() {
     let app = Router::new()
         .route("/posts", post(add_post))
         .route("/posts/upload_img/", post(upload_post_image))
-        // .route("/posts/download_img/{img_path}", get(download_img))
         .route("/posts/", patch(update_post).delete(delete_post))
         .route_layer(auth::AuthLayer)
-        .route("/posts/", get(get_posts))
         .route("/health", get(|| async { "Healthy!" }))
         .route("/login", post(login_view))
         .layer(DefaultBodyLimit::max(20 * 1024 * 1024))
         .route_layer(cors)
+        .route("/posts/", get(get_posts))
         .merge(serve_images())
         .merge(get_swagger_ui_router());
 
