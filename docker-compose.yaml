@@ -12,9 +12,9 @@ services:
     container_name: akm-website
     build: ./frontend
     ports:
-      - "80:80"
-#    depends_on:
-#      - akm-backend-rust
+      - "7000:80"
+    #    depends_on:
+    #      - akm-backend-rust
     restart: "always"
     links:
       - "akm-backend-rust:backend"
