@@ -25,12 +25,7 @@ export const router = createBrowserRouter([
               </BasePage>
             }
           >
-            <HomePage>
-              <div className="line-through animate-bounce animate-bounce-slow">
-                <p>Home Page....</p>
-                <p>Under Construction</p>
-              </div>
-            </HomePage>
+            <HomePage />
           </Suspense>
         ),
       },
