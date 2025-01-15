@@ -39,7 +39,7 @@ pub fn create_default_user() {
             panic!("Error inserting default user into the system, you need at least one user in the system");
         }
     } else {
-        println!("{:?}", all_users);
+        println!("number of users in the system: {:?}", is_user_in_sys.len());
         println!("There're users already in the system...")
     }
 }
