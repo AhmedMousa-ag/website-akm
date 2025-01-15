@@ -1,0 +1,11 @@
+FROM rust
+RUN useradd -ms /bin/bash akm_rust_user
+RUN cargo install diesel_cli --no-default-features --features postgres
+
+WORKDIR /usr/src/akm_rust
+COPY release/rust-backend .
+COPY .env .
+RUN chown -R akm_rust_user .
+RUN chmod 600 .env
+
+CMD ["/usr/src/akm_rust/rust-backend","&","rm .env"]
