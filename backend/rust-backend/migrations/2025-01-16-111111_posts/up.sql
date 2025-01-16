@@ -1,0 +1,1 @@
+ALTER TABLE posts ADD post_order INT NOT NULL DEFAULT 0;

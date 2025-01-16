@@ -118,6 +118,7 @@ pub async fn add_post(Json(payload): Json<AddPostRequest>) -> (StatusCode, respo
         content: &payload.content,
         summary: &payload.summary,
         post_type: &payload.post_type,
+        post_order: &payload.post_order,
         created_at: &SystemTime::now(),
         img_url: None,
     });
@@ -131,6 +132,7 @@ pub async fn add_post(Json(payload): Json<AddPostRequest>) -> (StatusCode, respo
                     content: post.content,
                     summary: post.summary,
                     post_type: post.post_type,
+                    post_order: post.post_order,
                     img_url: None,
                 }),
                 status: true,

@@ -64,6 +64,7 @@ diesel::table! {
         edited_at -> Nullable<Timestamp>,
         #[max_length = 6000]
         img_url -> Nullable<Varchar>,
+        post_order -> Int4,
     }
 }
 

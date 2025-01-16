@@ -7,6 +7,7 @@ pub struct AddPostRequest {
     pub content: String,
     pub summary: String,
     pub post_type: String,
+    pub post_order: i32,
 }
 #[derive(Debug, Deserialize, ToSchema)]
 pub struct ImageUpload {
@@ -32,6 +33,7 @@ pub struct Post {
     pub summary: String,
     pub post_type: String,
     pub img_url: Option<String>,
+    pub post_order: i32,
 }
 #[derive(Serialize, ToSchema)]
 pub struct AddPostResponse {
