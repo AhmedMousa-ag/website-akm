@@ -37,7 +37,9 @@ const PostsSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
-      (state.isLoading = false), (state.content = action.payload);
+      const tempList: PostStateType[] = action.payload;
+      (state.isLoading = false),
+        (state.content = tempList.sort((a, b) => a.post_order - b.post_order));
     });
     builder.addCase(fetchPosts.rejected, (state, action) => {
       state.isLoading = false;
@@ -53,7 +55,7 @@ const PostsSlice = createSlice({
         const tempList = [...state.content, postsData];
         (state.isLoading = false),
           (state.content = tempList.sort(
-            (a, b) => b.post_order - a.post_order,
+            (a, b) => a.post_order - b.post_order,
           ));
       },
     );
