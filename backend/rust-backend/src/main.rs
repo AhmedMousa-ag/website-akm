@@ -41,11 +41,11 @@ async fn main() {
         .route_layer(auth::AuthLayer)
         .route("/health", get(|| async { "Healthy!" }))
         .route("/login", post(login_view))
-        .layer(DefaultBodyLimit::max(20 * 1024 * 1024))
-        .route_layer(cors)
         .route("/posts/", get(get_posts))
+        .layer(DefaultBodyLimit::max(20 * 1024 * 1024))
         .merge(serve_images())
-        .merge(get_swagger_ui_router());
+        .merge(get_swagger_ui_router())
+        .route_layer(cors);
 
     // run our app with hyper, listening globally on port 3000
     let host_port = format!("{}:{}", config.operation.host, config.operation.port);

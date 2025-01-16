@@ -51,3 +51,4 @@ Cargo.lock
 backend/rust-backend/images/*
 backend/rust-backend/release
 !backend/rust-backend/release/rust-backend
+.rustc_info.json
