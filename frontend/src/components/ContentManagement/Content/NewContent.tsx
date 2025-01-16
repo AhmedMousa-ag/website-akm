@@ -16,16 +16,19 @@ export const NewPost = ({
   titleCom,
   contentCom,
   summaryCom,
+  postOrder,
 }: {
   post_type: string;
   id?: number;
   titleCom?: string;
   contentCom?: string;
   summaryCom?: string;
+  postOrder?: number;
 }) => {
   const [title, setTitle] = useState(titleCom ?? "");
   const [content, setContent] = useState(contentCom ?? "");
   const [summary, setSummary] = useState(summaryCom ?? "");
+  const [post_order, setPostOrder] = useState<number | undefined>(postOrder);
   const [isVerifyModal, setIsVerifyModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const postState = useSelector((state: RootState) => state.postsState);
@@ -36,9 +39,15 @@ export const NewPost = ({
       setSelectedFile(file);
     }
   };
-
+  console.log(post_order);
   function submitFn() {
-    const postData = { title, content, summary, post_type };
+    const postData = {
+      title,
+      content,
+      summary,
+      post_type,
+      post_order: post_order ? post_order : 0,
+    };
     if (titleCom) {
       dispatch(changeIsEditing(false));
       dispatch(patchPost({ body: { id, data: postData } }));
@@ -86,6 +95,21 @@ export const NewPost = ({
         >
           <p>Upload File</p>
           <input type="file" onChange={handleFileChange} accept="image/*" />
+          <label>Order</label>
+          <input
+            className={flexElementCss}
+            value={post_order}
+            type="number"
+            onChange={(e) =>
+              setPostOrder(() => {
+                const input = e.target.value;
+                if (input == "") {
+                  return;
+                }
+                return Number(input);
+              })
+            }
+          />
           <label>Title</label>
 
           <textarea

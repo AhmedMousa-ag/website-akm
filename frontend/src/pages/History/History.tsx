@@ -37,6 +37,7 @@ export const HistoryPage = () => {
                   summary={history.summary}
                   content={history.content}
                   img_url={history.img_url}
+                  postOrder={history.post_order}
                 />
               )
             );

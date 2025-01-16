@@ -19,8 +19,8 @@ export const HomePageContent = () => {
       <PargraphContent>
         <p>Certified by google in Tensorflow Machine Learning,</p>
         <p>
-          Pursuing a Master's in both Agriculture sciences and Computer Science to complement my Bachelor's in
-          Agricultural Science.
+          Pursuing a Master's in both Agriculture sciences and Computer Science
+          to complement my Bachelor's in Agricultural Science.
         </p>
       </PargraphContent>
     </div>

@@ -15,6 +15,7 @@ export interface PostStateType {
   content: string;
   post_type: string;
   img_url: string;
+  post_order: number;
 }
 
 const PostsInitState: {
@@ -49,8 +50,11 @@ const PostsSlice = createSlice({
       postPost.fulfilled,
       (state, action: PayloadAction<PostContentResponse>) => {
         const postsData = action.payload.data;
+        const tempList = [...state.content, postsData];
         (state.isLoading = false),
-          (state.content = [...state.content, postsData]);
+          (state.content = tempList.sort(
+            (a, b) => b.post_order - a.post_order,
+          ));
       },
     );
     builder.addCase(postPost.rejected, (state, action) => {

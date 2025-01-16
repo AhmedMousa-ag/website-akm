@@ -36,6 +36,7 @@ export const PersonalProjects = () => {
                   summary={project.summary}
                   content={project.content}
                   img_url={project.img_url}
+                  postOrder={project.post_order}
                 />
               )
             );

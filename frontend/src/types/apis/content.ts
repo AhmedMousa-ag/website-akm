@@ -5,6 +5,7 @@ export type ContentBodyRequest = {
     content: string;
     summary: string;
     post_type: string;
+    post_order: number;
   };
 };
 
@@ -15,6 +16,7 @@ export type PostContentResponse = {
     content: string;
     summary: string;
     post_type: string;
+    post_order: number;
     img_url: string;
   };
   status: boolean;
@@ -26,6 +28,7 @@ export type UpdateContentResponse = {
     title: string;
     content: string;
     summary: string;
+    post_order: number;
     post_type: string;
   };
 };
@@ -35,4 +38,5 @@ export type GetContentResponse = {
   content: string;
   summary: string;
   post_type: string;
+  post_order: number;
 };

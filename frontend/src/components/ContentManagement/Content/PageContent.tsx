@@ -16,6 +16,7 @@ type PostContent = {
   summary: string;
   content: string;
   img_url: string;
+  postOrder: number;
 };
 
 export const PostContent = ({
@@ -25,6 +26,7 @@ export const PostContent = ({
   summary,
   content,
   img_url,
+  postOrder,
 }: PostContent) => {
   const [isVerifyModal, setIsVerifyModal] = useState(false);
   const isEdittingState = useSelector(
@@ -53,6 +55,7 @@ export const PostContent = ({
             titleCom={title}
             contentCom={content}
             summaryCom={summary}
+            postOrder={postOrder}
           />
         </div>
       ) : (
