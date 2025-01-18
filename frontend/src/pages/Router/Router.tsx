@@ -6,8 +6,8 @@ import { LoadingBouncer } from "../../components/Loading";
 import { RootLayout } from "./Root";
 import { BasePage } from "../../components/BasePage";
 import { Login } from "../Home/Login";
-import { HistoryPage } from "../History/History";
 import { PersonalProjects } from "../PersonalProjects/PersonalProjects";
+import { CertificatePage } from "../Certificates/Certificates";
 
 export const router = createBrowserRouter([
   {
@@ -30,8 +30,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "history",
-        element: <HistoryPage />,
+        path: "certificate",
+        element: <CertificatePage/>,
       },
       {
         path: "personal-projecst",

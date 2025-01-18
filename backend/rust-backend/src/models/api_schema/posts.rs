@@ -18,11 +18,15 @@ pub struct PostTypeEnum;
 impl PostTypeEnum {
     pub const HISTORY: &str = "history";
     pub const PROJECT: &str = "project";
+    pub const CERTIFICATE: &str = "certificate";
 }
 
 impl PostTypeEnum {
     pub fn is_valid_type(&self, post_type: &str) -> bool {
-        matches!(post_type, PostTypeEnum::HISTORY | PostTypeEnum::PROJECT,)
+        matches!(
+            post_type,
+            PostTypeEnum::HISTORY | PostTypeEnum::CERTIFICATE | PostTypeEnum::PROJECT,
+        )
     }
 }
 #[derive(Serialize, ToSchema)]
