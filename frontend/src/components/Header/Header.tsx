@@ -28,10 +28,10 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
             Personal Projects
           </NavLink>
           <NavLink
-            to="history"
+            to="certificate"
             className={({ isActive }) => transActCss(hoverClass, isActive)}
           >
-            History
+            Certificates
           </NavLink>
           <NavLink to="linkedIn" className={hoverClass}>
             LinkedIn
