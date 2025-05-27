@@ -96,7 +96,7 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
 
         {/* Mobile Navigation Menu */}
         <div 
-          className={`md:hidden fixed top-20 right-0 w-64 bg-black border-l border-gray-700 z-50 transform transition-transform duration-300 ${
+          className={`md:hidden fixed top-20 right-4 w-64 bg-black border border-gray-700 rounded-lg shadow-lg z-50 transform transition-transform duration-300 ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
@@ -104,7 +104,7 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
             <NavLink
               to="personal-projecst"
               className={({ isActive }) =>
-                transActCss(`py-2 border-b border-gray-700 ${hoverClass}`, isActive)
+                transActCss(`py-2 px-3 rounded-md border-b border-gray-700 ${hoverClass}`, isActive)
               }
               onClick={toggleMobileMenu}
             >
@@ -113,7 +113,7 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
             <NavLink
               to="certificate"
               className={({ isActive }) => 
-                transActCss(`py-2 border-b border-gray-700 ${hoverClass}`, isActive)
+                transActCss(`py-2 px-3 rounded-md border-b border-gray-700 ${hoverClass}`, isActive)
               }
               onClick={toggleMobileMenu}
             >
@@ -121,14 +121,14 @@ export const Header = ({ children }: { children?: React.ReactNode }) => {
             </NavLink>
             <NavLink 
               to="linkedIn" 
-              className={`py-2 border-b border-gray-700 ${hoverClass}`}
+              className={`py-2 px-3 rounded-md border-b border-gray-700 ${hoverClass}`}
               onClick={toggleMobileMenu}
             >
               LinkedIn
             </NavLink>
             <NavLink 
               to="github" 
-              className={`py-2 border-b border-gray-700 ${hoverClass}`}
+              className={`py-2 px-3 rounded-md border-b border-gray-700 ${hoverClass}`}
               onClick={toggleMobileMenu}
             >
               Github
